@@ -1,0 +1,10 @@
+{
+  "cpu_s": 0.9276347980000001,
+  "frames": 100,
+  "max_rss_mb": 153.2265625,
+  "mean_features": 158.02,
+  "mean_wall_ms_per_frame": 3.689388639995741,
+  "rss_after_mb": 124.29296875,
+  "rss_before_mb": 115.3671875,
+  "wall_s": 0.3689388639995741
+}

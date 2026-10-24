@@ -1,0 +1,16 @@
+{
+  "camera_delay_ms": [0, 5, 10, 20, 40],
+  "frame_drop_percent": [0, 5, 10, 20, 40],
+  "imu_gap_ms": [0, 10, 50, 100],
+  "visual_conditions": ["nominal", "motion_blur", "low_light", "low_texture", "overexposure"],
+  "measured_outputs": [
+    "tracking_state",
+    "ate_rmse_m",
+    "rpe_translation_rmse_m",
+    "tracked_feature_count",
+    "covariance_trace",
+    "recovery_time_ms",
+    "estimator_latency_ms"
+  ],
+  "required_tracking_states": ["INITIALISING", "TRACKING", "DEGRADED", "LOST", "RESETTING"]
+}

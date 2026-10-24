@@ -1,0 +1,10 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+build/
+.venv/
+datasets/raw/
+datasets/downloads/
+benchmark-results/
+*.bag
+*.db3

@@ -1,0 +1,9 @@
+case,state,score,reasons
+nominal,TRACKING,100.0,
+camera_delay_15ms,DEGRADED,80.0,time_sync_degraded
+camera_delay_40ms,LOST,40.0,time_sync_failure
+frame_loss,DEGRADED,75.0,low_feature_count
+severe_frame_loss,LOST,0.0,feature_collapse;weak_geometry;covariance_high
+imu_gap_50ms,DEGRADED,80.0,imu_gap_degraded
+imu_gap_150ms,LOST,30.0,imu_gap
+blur_low_geometry,DEGRADED,35.0,low_feature_count;weak_geometry;covariance_high

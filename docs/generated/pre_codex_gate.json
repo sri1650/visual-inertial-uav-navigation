@@ -1,0 +1,70 @@
+{
+  "status": "pass",
+  "checks": [
+    {
+      "name": "pytest",
+      "returncode": 0,
+      "elapsed_s": 5.003,
+      "stdout_tail": "\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m.\u001b[0m\u001b[32m                       [100%]\u001b[0m\n\u001b[32m\u001b[32m\u001b[1m50 passed\u001b[0m\u001b[32m in 0.21s\u001b[0m\u001b[0m\n",
+      "stderr_tail": "Spreadsheet runtime warmup failed during python startup\nTraceback (most recent call last):\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py\", line 26, in warm_spreadsheet_runtime_on_startup\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 785, in warm_spreadsheet_runtime\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 718, in _warm_feature_flows\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 509, in _warm_drawing_and_image_flows\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/generated/interface/models.py\", line 32861, in bring_to_front\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/remote.py\", line 764, in __call__\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/client.py\", line 175, in call\nartifact_tool.rpc.client.RemoteError: Element ordering requires an owning element collection.\n"
+    },
+    {
+      "name": "compileall",
+      "returncode": 0,
+      "elapsed_s": 3.893,
+      "stdout_tail": "",
+      "stderr_tail": "Spreadsheet runtime warmup failed during python startup\nTraceback (most recent call last):\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py\", line 26, in warm_spreadsheet_runtime_on_startup\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 785, in warm_spreadsheet_runtime\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 718, in _warm_feature_flows\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 509, in _warm_drawing_and_image_flows\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/generated/interface/models.py\", line 32861, in bring_to_front\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/remote.py\", line 764, in __call__\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/client.py\", line 175, in call\nartifact_tool.rpc.client.RemoteError: Element ordering requires an owning element collection.\n"
+    },
+    {
+      "name": "cmake_configure",
+      "returncode": 0,
+      "elapsed_s": 0.269,
+      "stdout_tail": "-- The CXX compiler identification is GNU 14.2.0\n-- Detecting CXX compiler ABI info\n-- Detecting CXX compiler ABI info - done\n-- Check for working CXX compiler: /usr/bin/c++ - skipped\n-- Detecting CXX compile features\n-- Detecting CXX compile features - done\n-- Configuring done (0.2s)\n-- Generating done (0.0s)\n-- Build files have been written to: /tmp/vionav-pre-codex-cpp\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "cpp_build",
+      "returncode": 0,
+      "elapsed_s": 2.22,
+      "stdout_tail": "[  5%] \u001b[32mBuilding CXX object CMakeFiles/vionav_core.dir/src/quality.cpp.o\u001b[0m\n[ 15%] \u001b[32mBuilding CXX object CMakeFiles/vionav_core.dir/src/imu.cpp.o\u001b[0m\n[ 15%] \u001b[32mBuilding CXX object CMakeFiles/vionav_core.dir/src/timestamp_sync.cpp.o\u001b[0m\n[ 21%] \u001b[32mBuilding CXX object CMakeFiles/vionav_core.dir/src/estimator_state.cpp.o\u001b[0m\n[ 26%] \u001b[32mBuilding CXX object CMakeFiles/vionav_core.dir/src/calibration.cpp.o\u001b[0m\n[ 31%] \u001b[32mBuilding CXX object CMakeFiles/vionav_core.dir/src/keyframes.cpp.o\u001b[0m\n[ 36%] \u001b[32m\u001b[1mLinking CXX static library libvionav_core.a\u001b[0m\n[ 36%] Built target vionav_core\n[ 42%] \u001b[32mBuilding CXX object CMakeFiles/timestamp_sync_test.dir/tests/timestamp_sync_test.cpp.o\u001b[0m\n[ 47%] \u001b[32mBuilding CXX object CMakeFiles/imu_test.dir/tests/imu_test.cpp.o\u001b[0m\n[ 52%] \u001b[32mBuilding CXX object CMakeFiles/estimator_state_test.dir/tests/estimator_state_test.cpp.o\u001b[0m\n[ 57%] \u001b[32mBuilding CXX object CMakeFiles/quality_test.dir/tests/quality_test.cpp.o\u001b[0m\n[ 63%] \u001b[32mBuilding CXX object CMakeFiles/keyframes_test.dir/tests/keyframes_test.cpp.o\u001b[0m\n[ 68%] \u001b[32mBuilding CXX object CMakeFiles/calibration_test.dir/tests/calibration_test.cpp.o\u001b[0m\n[ 73%] \u001b[32m\u001b[1mLinking CXX executable quality_test\u001b[0m\n[ 78%] \u001b[32m\u001b[1mLinking CXX executable imu_test\u001b[0m\n[ 84%] \u001b[32m\u001b[1mLinking CXX executable timestamp_sync_test\u001b[0m\n[ 84%] Built target quality_test\n[ 84%] Built target timestamp_sync_test\n[ 89%] \u001b[32m\u001b[1mLinking CXX executable keyframes_test\u001b[0m\n[ 89%] Built target imu_test\n[ 94%] \u001b[32m\u001b[1mLinking CXX executable estimator_state_test\u001b[0m\n[ 94%] Built target keyframes_test\n[ 94%] Built target estimator_state_test\n[100%] \u001b[32m\u001b[1mLinking CXX executable calibration_test\u001b[0m\n[100%] Built target calibration_test\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "ctest",
+      "returncode": 0,
+      "elapsed_s": 0.025,
+      "stdout_tail": "Internal ctest changing into directory: /tmp/vionav-pre-codex-cpp\nTest project /tmp/vionav-pre-codex-cpp\n    Start 1: timestamp_sync_test\n1/6 Test #1: timestamp_sync_test ..............   Passed    0.00 sec\n    Start 2: calibration_test\n2/6 Test #2: calibration_test .................   Passed    0.00 sec\n    Start 3: imu_test\n3/6 Test #3: imu_test .........................   Passed    0.00 sec\n    Start 4: estimator_state_test\n4/6 Test #4: estimator_state_test .............   Passed    0.00 sec\n    Start 5: quality_test\n5/6 Test #5: quality_test .....................   Passed    0.00 sec\n    Start 6: keyframes_test\n6/6 Test #6: keyframes_test ...................   Passed    0.00 sec\n\n\u001b[0;32m100% tests passed\u001b[0;0m, 0 tests failed\u001b[0;0m out of 6\n\nTotal Test time (real) =   0.01 sec\n",
+      "stderr_tail": ""
+    },
+    {
+      "name": "video_benchmark",
+      "returncode": 0,
+      "elapsed_s": 3.853,
+      "stdout_tail": "{\n  \"frames\": 10,\n  \"max_ms\": 6.500439,\n  \"mean_features\": 159.1,\n  \"mean_ms\": 5.191077,\n  \"p50_ms\": 5.0927135,\n  \"p95_ms\": 5.993304299999998\n}\n",
+      "stderr_tail": "Spreadsheet runtime warmup failed during python startup\nTraceback (most recent call last):\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py\", line 26, in warm_spreadsheet_runtime_on_startup\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 785, in warm_spreadsheet_runtime\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 718, in _warm_feature_flows\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 509, in _warm_drawing_and_image_flows\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/generated/interface/models.py\", line 32861, in bring_to_front\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/remote.py\", line 764, in __call__\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/client.py\", line 175, in call\nartifact_tool.rpc.client.RemoteError: Element ordering requires an owning element collection.\n"
+    },
+    {
+      "name": "fault_campaign",
+      "returncode": 0,
+      "elapsed_s": 3.782,
+      "stdout_tail": "[\n  {\n    \"case\": \"nominal\",\n    \"state\": \"TRACKING\",\n    \"score\": 100.0,\n    \"reasons\": []\n  },\n  {\n    \"case\": \"camera_delay_15ms\",\n    \"state\": \"DEGRADED\",\n    \"score\": 80.0,\n    \"reasons\": [\n      \"time_sync_degraded\"\n    ]\n  },\n  {\n    \"case\": \"camera_delay_40ms\",\n    \"state\": \"LOST\",\n    \"score\": 40.0,\n    \"reasons\": [\n      \"time_sync_failure\"\n    ]\n  },\n  {\n    \"case\": \"frame_loss\",\n    \"state\": \"DEGRADED\",\n    \"score\": 75.0,\n    \"reasons\": [\n      \"low_feature_count\"\n    ]\n  },\n  {\n    \"case\": \"severe_frame_loss\",\n    \"state\": \"LOST\",\n    \"score\": 0.0,\n    \"reasons\": [\n      \"feature_collapse\",\n      \"weak_geometry\",\n      \"covariance_high\"\n    ]\n  },\n  {\n    \"case\": \"imu_gap_50ms\",\n    \"state\": \"DEGRADED\",\n    \"score\": 80.0,\n    \"reasons\": [\n      \"imu_gap_degraded\"\n    ]\n  },\n  {\n    \"case\": \"imu_gap_150ms\",\n    \"state\": \"LOST\",\n    \"score\": 30.0,\n    \"reasons\": [\n      \"imu_gap\"\n    ]\n  },\n  {\n    \"case\": \"blur_low_geometry\",\n    \"state\": \"DEGRADED\",\n    \"score\": 35.0,\n    \"reasons\": [\n      \"low_feature_count\",\n      \"weak_geometry\",\n      \"covariance_high\"\n    ]\n  }\n]\n",
+      "stderr_tail": "Spreadsheet runtime warmup failed during python startup\nTraceback (most recent call last):\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py\", line 26, in warm_spreadsheet_runtime_on_startup\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 785, in warm_spreadsheet_runtime\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 718, in _warm_feature_flows\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 509, in _warm_drawing_and_image_flows\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/generated/interface/models.py\", line 32861, in bring_to_front\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/remote.py\", line 764, in __call__\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/client.py\", line 175, in call\nartifact_tool.rpc.client.RemoteError: Element ordering requires an owning element collection.\n"
+    },
+    {
+      "name": "resource_profile",
+      "returncode": 0,
+      "elapsed_s": 3.889,
+      "stdout_tail": "{\n  \"cpu_s\": 0.30639952699999995,\n  \"frames\": 10,\n  \"max_rss_mb\": 123.89453125,\n  \"mean_features\": 159.1,\n  \"mean_wall_ms_per_frame\": 6.166064300123253,\n  \"rss_after_mb\": 116.328125,\n  \"rss_before_mb\": 115.37109375,\n  \"wall_s\": 0.06166064300123253\n}\n",
+      "stderr_tail": "Spreadsheet runtime warmup failed during python startup\nTraceback (most recent call last):\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/patches/warm_spreadsheet_runtime_on_startup.py\", line 26, in warm_spreadsheet_runtime_on_startup\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 785, in warm_spreadsheet_runtime\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 718, in _warm_feature_flows\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/spreadsheet_warmup.py\", line 509, in _warm_drawing_and_image_flows\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/generated/interface/models.py\", line 32861, in bring_to_front\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/remote.py\", line 764, in __call__\n  File \"/tmp/tmp.QlpUkOUI9D/artifact_tool_v2-2.8.66/artifact_tool/rpc/client.py\", line 175, in call\nartifact_tool.rpc.client.RemoteError: Element ordering requires an owning element collection.\n"
+    }
+  ],
+  "reserved_for_codex": [
+    "real nonlinear visual-inertial estimator backend",
+    "backend covariance integration and reset/recovery integration",
+    "production loop closure / 6-DoF pose graph backend",
+    "PX4 SITL + MAVLink/MAVSDK external vision integration",
+    "GPS-denied mission and estimator-loss failsafe validation",
+    "ARM hardware performance optimisation",
+    "real EuRoC estimator runs and final performance claims"
+  ]
+}

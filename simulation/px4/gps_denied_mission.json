@@ -1,0 +1,37 @@
+{
+  "frame": "NED",
+  "mode": "external_vision",
+  "waypoints": [
+    {
+      "north_m": 0,
+      "east_m": 0,
+      "down_m": -2
+    },
+    {
+      "north_m": 5,
+      "east_m": 0,
+      "down_m": -2
+    },
+    {
+      "north_m": 5,
+      "east_m": 5,
+      "down_m": -2
+    },
+    {
+      "north_m": 0,
+      "east_m": 5,
+      "down_m": -2
+    },
+    {
+      "north_m": 0,
+      "east_m": 0,
+      "down_m": -2
+    }
+  ],
+  "acceptance": {
+    "mission_completed": true,
+    "external_vision_required": true,
+    "position_error_m_max": 1.0,
+    "no_uncommanded_mode_change": true
+  }
+}

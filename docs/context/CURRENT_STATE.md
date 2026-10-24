@@ -1,0 +1,133 @@
+# Current State
+
+## Verified pre-Codex baseline
+
+- Formal task graph: **29/39 complete**
+- Python tests: **50 passing**
+- C++ tests: **6/6 passing**
+- Pre-Codex gate: **PASS**
+- Physical UAV validation: **none**
+- PX4 SITL validation: **not yet completed**
+
+## Completed before Codex
+
+### Timing / calibration
+- camera/IMU typed contracts
+- rigid transform validation
+- camera intrinsics validation
+- nearest timestamp association
+- deterministic camera/IMU time-offset estimation
+- calibration quality report
+
+### Geometric vision
+- preprocessing / CLAHE
+- feature detection
+- pyramidal LK tracking
+- forward/backward validation
+- essential-matrix RANSAC
+- deterministic keyframe policy
+
+### IMU
+- C++ IMU ring buffer/interpolation
+- bias model
+- preintegration foundation
+- stationary gravity initialisation
+
+### Estimator health boundary
+- explicit INITIALISING / TRACKING / DEGRADED / LOST / RESETTING state model
+- C++ and Python quality scoring
+- bounded reset/recovery supervisor
+- timing/frame/IMU-gap fault campaign
+
+This is **not** the nonlinear VIO backend. M4-T02 remains deliberately incomplete.
+
+### SLAM boundary
+- Python + C++ keyframe database
+- deterministic loop-closure candidate retrieval
+- translation pose-graph correction prototype
+- loop fixture proves drift correction
+
+The final 6-DoF SLAM/loop backend may be upgraded during integration, but the architecture/interface task is complete.
+
+### PX4 boundary preparation
+- ENU <-> NED conversion
+- typed external-vision sample contract
+- GPS-denied waypoint fixture
+- estimator-loss failsafe policy fixture
+- SITL launch wrapper/spec
+
+Actual MAVLink/MAVSDK transport and PX4 SITL acceptance remain incomplete.
+
+### Embedded / runtime
+- ARM64 cross-build Docker/toolchain profile
+- embedded Linux process split and deployment documentation
+- real-time synthetic video preprocessing/feature benchmark
+- watchdog/failsafe supervisor
+
+### Geo-localisation
+- typed map reference/result interface
+- ORB coarse retrieval + homography geometric verification
+- confidence gating
+- offline fixture localisation and low-texture rejection
+
+### Benchmarking / faults
+- EuRoC camera/IMU/ground-truth loaders
+- rigid SE(3) trajectory alignment
+- ATE/RPE benchmark tooling
+- timestamp offset sensitivity tools
+- dropped-frame and IMU-gap injection helpers
+- retained tracking-quality fault campaign
+- video latency + process resource benchmark
+
+## Measured local pre-backend evidence
+
+From 100 synthetic 640x480 frames on this runtime:
+- mean preprocessing/feature latency: ~4.25 ms/frame
+- p50: ~3.91 ms
+- p95: ~5.74 ms
+- max: ~22.03 ms
+- mean detected features: ~158
+
+Process profile over 100 frames:
+- mean wall time: ~3.69 ms/frame
+- max RSS observed: ~153 MB
+
+These numbers are **frontend/local-runtime evidence only**, not full VIO, ARM hardware, PX4 or production performance.
+
+Retained quality-state campaign:
+- nominal -> TRACKING
+- 15 ms camera/IMU residual -> DEGRADED
+- 40 ms residual -> LOST
+- moderate frame loss -> DEGRADED
+- severe frame loss -> LOST
+- 50 ms IMU gap -> DEGRADED
+- 150 ms IMU gap -> LOST
+
+These transitions validate the health policy around the future estimator; they are not trajectory-accuracy results.
+
+## Deliberately reserved for Codex / Work
+
+Remaining formal tasks:
+M4-T02, M4-T03, M4-T04, M6-T01, M6-T02, M6-T03, M6-T04, M10-T01, M10-T02, M10-T03
+
+### Hard technical core
+1. **M4-T02** — real visual-inertial estimator backend
+2. **M4-T03** — integrate real estimator covariance/quality into the prepared health boundary
+3. **M4-T04** — integrate reset/recovery with actual estimator state
+4. **M6-T01** — install/launch PX4 SITL + Gazebo and verify environment
+5. **M6-T02** — real MAVLink/MAVSDK external vision transport accepted by PX4
+6. **M6-T03** — GPS-denied waypoint mission completes in SITL
+7. **M6-T04** — estimator-loss failsafe proven in SITL
+
+### Final evidence only after integration
+8. M10-T01 — final clean-machine demo script
+9. M10-T02 — final integrated benchmark report/architecture diagrams
+10. M10-T03 — final recruiter README/interview pack with integrated evidence
+
+## First Work command
+
+```bash
+python tools/pre_codex_gate.py
+```
+
+If it passes, do not refactor the completed pre-Codex modules unless a deterministic integration failure requires it.

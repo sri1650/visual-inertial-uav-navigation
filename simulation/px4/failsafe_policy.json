@@ -1,0 +1,18 @@
+{
+  "external_vision": {
+    "degraded": {
+      "action": "continue_with_quality_flag",
+      "max_duration_ms": 500
+    },
+    "lost": {
+      "action": "request_position_hold_or_land",
+      "external_vision_allowed": false
+    },
+    "watchdog": {
+      "camera_timeout_ms": 500,
+      "imu_timeout_ms": 100,
+      "estimator_timeout_ms": 250
+    }
+  },
+  "note": "Policy fixture only. Actual PX4 parameterisation and SITL validation remain required."
+}

@@ -1,0 +1,477 @@
+{
+  "project": "visual-inertial-uav-navigation",
+  "tasks": [
+    {
+      "id": "M0-T01",
+      "title": "Verify starter Python and C++ baselines",
+      "status": "done",
+      "dependencies": [],
+      "acceptance": [
+        "pytest passes",
+        "CMake build + CTest pass"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M1-T01",
+      "title": "Define camera and IMU typed contracts",
+      "status": "done",
+      "dependencies": [
+        "M0-T01"
+      ],
+      "acceptance": [
+        "unit tests pass"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M1-T02",
+      "title": "Implement frame/transform conventions and validation",
+      "status": "done",
+      "dependencies": [
+        "M1-T01"
+      ],
+      "acceptance": [
+        "invalid transforms rejected"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M1-T03",
+      "title": "Implement calibration-file parser and validator",
+      "status": "done",
+      "dependencies": [
+        "M1-T02"
+      ],
+      "acceptance": [
+        "round-trip fixture passes"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M1-T04",
+      "title": "Implement camera/IMU time-offset estimator",
+      "status": "done",
+      "dependencies": [
+        "M1-T01"
+      ],
+      "acceptance": [
+        "synthetic offset recovered"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M1-T05",
+      "title": "Add calibration-quality report",
+      "status": "done",
+      "dependencies": [
+        "M1-T03",
+        "M1-T04"
+      ],
+      "acceptance": [
+        "report generated deterministically"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M2-T01",
+      "title": "Implement grayscale/preprocessing pipeline",
+      "status": "done",
+      "dependencies": [
+        "M1-T01"
+      ],
+      "acceptance": [
+        "fixture tests pass"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M2-T02",
+      "title": "Implement feature detector and tracker",
+      "status": "done",
+      "dependencies": [
+        "M2-T01"
+      ],
+      "acceptance": [
+        "synthetic sequence tracks features"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M2-T03",
+      "title": "Implement geometric outlier rejection",
+      "status": "done",
+      "dependencies": [
+        "M2-T02"
+      ],
+      "acceptance": [
+        "outlier fixture rejected"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M2-T04",
+      "title": "Implement keyframe selection policy",
+      "status": "done",
+      "dependencies": [
+        "M2-T03"
+      ],
+      "acceptance": [
+        "deterministic policy tests pass"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M3-T01",
+      "title": "Implement IMU ring buffer and interpolation",
+      "status": "done",
+      "dependencies": [
+        "M1-T01"
+      ],
+      "acceptance": [
+        "boundary tests pass"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M3-T02",
+      "title": "Implement IMU bias state",
+      "status": "done",
+      "dependencies": [
+        "M3-T01"
+      ],
+      "acceptance": [
+        "bias propagation tests pass"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M3-T03",
+      "title": "Implement IMU preintegration",
+      "status": "done",
+      "dependencies": [
+        "M3-T02"
+      ],
+      "acceptance": [
+        "constant-motion synthetic test passes"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M3-T04",
+      "title": "Implement gravity/initialisation routine",
+      "status": "done",
+      "dependencies": [
+        "M3-T03"
+      ],
+      "acceptance": [
+        "stationary fixture initialises"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M4-T01",
+      "title": "Define estimator state and tracking modes",
+      "status": "done",
+      "dependencies": [
+        "M2-T04",
+        "M3-T04"
+      ],
+      "acceptance": [
+        "state tests pass"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M4-T02",
+      "title": "Implement visual-inertial estimator backend",
+      "status": "todo",
+      "dependencies": [
+        "M4-T01"
+      ],
+      "acceptance": [
+        "synthetic trajectory converges"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M4-T03",
+      "title": "Implement covariance/quality output",
+      "status": "todo",
+      "dependencies": [
+        "M4-T02"
+      ],
+      "acceptance": [
+        "quality state degrades under faults"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M4-T04",
+      "title": "Implement reset/recovery logic",
+      "status": "todo",
+      "dependencies": [
+        "M4-T03"
+      ],
+      "acceptance": [
+        "tracking-loss recovery test passes"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M5-T01",
+      "title": "Add keyframe database abstraction",
+      "status": "done",
+      "dependencies": [
+        "M4-T02"
+      ],
+      "acceptance": [
+        "API tests pass"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M5-T02",
+      "title": "Add loop-closure candidate interface",
+      "status": "done",
+      "dependencies": [
+        "M5-T01"
+      ],
+      "acceptance": [
+        "deterministic candidate fixture passes"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M5-T03",
+      "title": "Add pose-graph correction boundary",
+      "status": "done",
+      "dependencies": [
+        "M5-T02"
+      ],
+      "acceptance": [
+        "loop fixture corrects drift"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M6-T01",
+      "title": "Add PX4 SITL/Gazebo environment",
+      "status": "todo",
+      "dependencies": [
+        "M4-T04"
+      ],
+      "acceptance": [
+        "sim launches"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M6-T02",
+      "title": "Implement MAVLink/MAVSDK navigation bridge",
+      "status": "todo",
+      "dependencies": [
+        "M6-T01"
+      ],
+      "acceptance": [
+        "pose feed accepted by SITL"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M6-T03",
+      "title": "Implement GPS-denied waypoint scenario",
+      "status": "todo",
+      "dependencies": [
+        "M6-T02"
+      ],
+      "acceptance": [
+        "mission completes in sim"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M6-T04",
+      "title": "Implement estimator-loss failsafe scenario",
+      "status": "todo",
+      "dependencies": [
+        "M6-T03"
+      ],
+      "acceptance": [
+        "failsafe state verified"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M7-T01",
+      "title": "Add ARM/embedded-Linux build profile",
+      "status": "done",
+      "dependencies": [
+        "M4-T04"
+      ],
+      "acceptance": [
+        "cross-build or native ARM build documented"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M7-T02",
+      "title": "Add real-time video pipeline",
+      "status": "done",
+      "dependencies": [
+        "M7-T01",
+        "M2-T02"
+      ],
+      "acceptance": [
+        "latency benchmark produced"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M7-T03",
+      "title": "Add watchdog/process health monitor",
+      "status": "done",
+      "dependencies": [
+        "M7-T01"
+      ],
+      "acceptance": [
+        "fault injection test passes"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M8-T01",
+      "title": "Define geo-localisation interface",
+      "status": "done",
+      "dependencies": [
+        "M5-T03"
+      ],
+      "acceptance": [
+        "typed API tests pass"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M8-T02",
+      "title": "Implement coarse-to-fine map localisation prototype",
+      "status": "done",
+      "dependencies": [
+        "M8-T01"
+      ],
+      "acceptance": [
+        "offline fixture localises"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M8-T03",
+      "title": "Implement confidence gating/degraded mode",
+      "status": "done",
+      "dependencies": [
+        "M8-T02"
+      ],
+      "acceptance": [
+        "low-confidence case rejected"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M9-T01",
+      "title": "Add EuRoC dataset loader",
+      "status": "done",
+      "dependencies": [
+        "M4-T04"
+      ],
+      "acceptance": [
+        "dataset timestamps parse"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M9-T02",
+      "title": "Implement ATE/RPE benchmark runner",
+      "status": "done",
+      "dependencies": [
+        "M9-T01"
+      ],
+      "acceptance": [
+        "known synthetic metrics pass"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M9-T03",
+      "title": "Add timestamp-offset fault injection",
+      "status": "done",
+      "dependencies": [
+        "M9-T02"
+      ],
+      "acceptance": [
+        "degradation curve produced"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M9-T04",
+      "title": "Add dropped-frame/IMU-gap fault injection",
+      "status": "done",
+      "dependencies": [
+        "M9-T02"
+      ],
+      "acceptance": [
+        "tracking state transitions measured"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M9-T05",
+      "title": "Create latency/resource benchmark",
+      "status": "done",
+      "dependencies": [
+        "M7-T02",
+        "M9-T02"
+      ],
+      "acceptance": [
+        "report generated"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M10-T01",
+      "title": "Create end-to-end demo script",
+      "status": "todo",
+      "dependencies": [
+        "M6-T04",
+        "M9-T05"
+      ],
+      "acceptance": [
+        "clean-machine instructions complete"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M10-T02",
+      "title": "Publish benchmark report and architecture diagrams",
+      "status": "todo",
+      "dependencies": [
+        "M10-T01"
+      ],
+      "acceptance": [
+        "README links evidence"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    },
+    {
+      "id": "M10-T03",
+      "title": "Final recruiter README and interview pack",
+      "status": "todo",
+      "dependencies": [
+        "M10-T02"
+      ],
+      "acceptance": [
+        "claims match measured evidence"
+      ],
+      "verification": "Run the narrowest relevant deterministic tests first; then full Python/C++ suite."
+    }
+  ]
+}
