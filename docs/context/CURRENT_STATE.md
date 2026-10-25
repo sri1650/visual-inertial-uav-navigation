@@ -2,8 +2,8 @@
 
 ## Verified pre-Codex baseline
 
-- Formal task graph: **35/39 complete**
-- Python tests: **56 passing**
+- Formal task graph: **36/39 complete**
+- Python tests: **57 passing**
 - C++ tests: **9/9 passing**
 - Pre-Codex gate: **PASS**
 - Physical UAV validation: **none**
@@ -56,7 +56,7 @@ The final 6-DoF SLAM/loop backend may be upgraded during integration, but the ar
 - estimator-loss failsafe policy fixture
 - SITL launch wrapper/spec
 
-PX4 SITL acceptance, MAVLink external-vision transport and the GPS-denied waypoint mission are complete. The estimator-loss failsafe acceptance remains incomplete.
+PX4 SITL acceptance, MAVLink external-vision transport, the GPS-denied waypoint mission and the estimator-loss failsafe are complete.
 
 ### Embedded / runtime
 - ARM64 cross-build Docker/toolchain profile
@@ -108,10 +108,7 @@ These transitions validate the health policy around the future estimator; they a
 ## Deliberately reserved for Codex / Work
 
 Remaining formal tasks:
-M6-T04, M10-T01, M10-T02, M10-T03
-
-### Hard technical core
-1. **M6-T04** — estimator-loss failsafe proven in SITL
+M10-T01, M10-T02, M10-T03
 
 ### Final evidence only after integration
 8. M10-T01 — final clean-machine demo script
@@ -134,3 +131,4 @@ If it passes, do not refactor the completed pre-Codex modules unless a determini
 - M6-T01 complete: pinned PX4 commit `22b15b91fba5e79f01248d1c644ef942382af517` builds against its locked Gazebo Harmonic environment. The project wrapper launches Gazebo 8.10.0 headlessly, spawns x500, connects IMU/GPS/barometer/magnetometer streams, opens MAVLink ports and reaches a successful PX4 startup. Evidence is retained under `simulation/px4/evidence/`; 50 Python and 9 C++ tests pass.
 - M6-T02 complete: the MAVLink 2 adapter publishes quality-gated, timestamp-checked `ODOMETRY` in local NED with ENU/FLU pose conversion, covariance, reset counter and VIO estimator type. Live PX4 received the exact sample on `vehicle_visual_odometry`; with `EKF2_EV_CTRL=7`, EKF2 reported `cs_ev_pos`, `cs_ev_hgt` and `cs_ev_vel` true with zero fault-status changes. Evidence is in `simulation/px4/evidence/m6-t02-acceptance.md`; 53 Python and 9 C++ tests pass.
 - M6-T03 complete: PX4 flew all five retained NED waypoints with GNSS fusion disabled and live Gazebo ground truth supplied only through the external-vision MAVLink boundary. Every waypoint settled within the 1 m acceptance radius, 840 vision messages were sent, and PX4 landed and disarmed in 32.474 s. Evidence is in `simulation/px4/evidence/m6-t03-mission.json`; 56 Python and 9 C++ tests pass.
+- M6-T04 complete: after 399 live vision updates and a stable Offboard hover, the verifier stopped only the external-vision stream while retaining GCS heartbeats and setpoints. PX4 invalidated local position, activated its Descend/blind-land failsafe in 0.658 s, detected landing and disarmed. Evidence is in `simulation/px4/evidence/m6-t04-failsafe.json`; 57 Python and 9 C++ tests pass.

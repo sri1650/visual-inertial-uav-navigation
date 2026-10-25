@@ -72,14 +72,16 @@ class MissionRuntime:
         self.last_heartbeat_s=0.0
         self.latest_local_position=None
         self.latest_heartbeat=None
+        self.status_texts=[]
         self.parameter_values={}
         self.target=None
+        self.vision_enabled=True
         self.messages_sent=0
 
     def tick(self) -> None:
         started=time.monotonic()
         truth=self.ground_truth.latest()
-        if truth is not None:
+        if truth is not None and self.vision_enabled:
             sample=make_external_vision_sample(
                 timestamp_ns=truth.timestamp_ns,
                 position_enu_m=truth.position_enu_m,
@@ -107,6 +109,9 @@ class MissionRuntime:
                 self.latest_local_position=(message.x,message.y,message.z)
             elif message.get_type()=="HEARTBEAT" and message.get_srcSystem()==self.connection.target_system:
                 self.latest_heartbeat=message
+            elif message.get_type()=="STATUSTEXT":
+                status_text=message.text.decode() if isinstance(message.text,bytes) else message.text
+                self.status_texts.append((time.monotonic(),status_text.rstrip("\x00")))
             elif message.get_type()=="PARAM_VALUE":
                 param_id=message.param_id.decode() if isinstance(message.param_id,bytes) else message.param_id
                 if message.param_type==mavutil.mavlink.MAV_PARAM_TYPE_INT32:

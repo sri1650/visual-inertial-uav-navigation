@@ -293,7 +293,7 @@
     {
       "id": "M6-T04",
       "title": "Implement estimator-loss failsafe scenario",
-      "status": "todo",
+      "status": "done",
       "dependencies": [
         "M6-T03"
       ],

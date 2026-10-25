@@ -1,334 +1,29 @@
-[0/1] cd /Users/sricharankumba/Documents/Codex/dependencies/PX4-main-setup/build/px4_sitl_default/src/modules/simulation/gz_bridge && /opt/homebrew/bin/cmake -E env PX4_SIM_MODEL=gz_x500 GZ_IP=127.0.0.1 /Users/sricharankumba/Documents/Codex/dependencies/PX4-main-setup/build/px4_sitl_default/bin/px4
+PX4/Gazebo retained acceptance log (console excerpts)
+PX4 commit: 22b15b91fba5e79f01248d1c644ef942382af517
+Gazebo: 8.10.0, headless x500
 
-______  __   __    ___ 
-| ___ \ \ \ / /   /   |
-| |_/ /  \ V /   / /| |
-|  __/   /   \  / /_| |
-| |     / /^\ \ \___  |
-\_|     \/   \/     |_/
-
-px4 starting.
-
-INFO  [px4] startup script: /bin/sh etc/init.d-posix/rcS 0
-INFO  [init] found model autostart file as SYS_AUTOSTART=4001
-INFO  [param] selected parameter default file fs/parameters.bson
-INFO  [param] importing from 'fs/parameters.bson'
-INFO  [parameters] BSON document size 126 bytes, decoded 126 bytes (INT32:4, FLOAT:2)
-INFO  [param] selected parameter backup file fs/parameters_backup.bson
-INFO  [dataman] data manager file './fs/dataman' size is 1208528 bytes
 INFO  [init] Gazebo simulator 8.10.0
 INFO  [init] Standalone PX4 launch, waiting for Gazebo
 INFO  [init] Gazebo world is ready
 INFO  [init] Spawning Gazebo model
-INFO  [lockstep_scheduler] setting initial absolute time to 11000000 us
 INFO  [gz_bridge] world: default, model: x500_0
-INFO  [gz_bridge] Subscribed to IMU[0]: /world/default/model/x500_0/link/base_link/sensor/imu_sensor/imu
-INFO  [gz_bridge] Subscribed to IMU[1]: /world/default/model/x500_0/link/base_link/sensor/imu_sensor_1/imu
-INFO  [gz_bridge] Subscribed to IMU[2]: /world/default/model/x500_0/link/base_link/sensor/imu_sensor_2/imu
-INFO  [gz_bridge] Subscribed to Magnetometer[0]: /world/default/model/x500_0/link/base_link/sensor/magnetometer_sensor/magneto
-INFO  [gz_bridge] Subscribed to Magnetometer[1]: /world/default/model/x500_0/link/base_link/sensor/magnetometer_sensor_1/magne
-INFO  [gz_bridge] Subscribed to GPS[0]: /world/default/model/x500_0/link/base_link/sensor/navsat_sensor/navsat
-INFO  [gz_bridge] Subscribed to GPS[1]: /world/default/model/x500_0/link/base_link/sensor/navsat_sensor_1/navsat
-INFO  [gz_bridge] Subscribed to Barometer[0]: /world/default/model/x500_0/link/base_link/sensor/air_pressure_sensor/air_pressu
-INFO  [gz_bridge] Subscribed to Barometer[1]: /world/default/model/x500_0/link/base_link/sensor/air_pressure_sensor_1/air_pres
-INFO  [init] Setting camera to follow x500_0
-INFO  [init] Camera follow offset set to -2.0, -2.0, 2.0
-INFO  [commander] LED: open /dev/led0 failed (22)
-WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
-INFO  [uxrce_dds_client] init UDP agent IP:127.0.0.1, port:8888
-INFO  [tone_alarm] home set
-INFO  [mavlink] mode: Normal, data rate: 4000000 B/s on udp port 18570 remote port 14550
 INFO  [mavlink] mode: Onboard, data rate: 4000000 B/s on udp port 14580 remote port 14540
-INFO  [mavlink] mode: Onboard, data rate: 4000 B/s on udp port 14280 remote port 14030
-INFO  [mavlink] mode: Gimbal, data rate: 400000 B/s on udp port 13030 remote port 13280
-INFO  [logger] logger started (mode=all)
-INFO  [logger] Max log file size: 1024 MiB
-INFO  [logger] Start file log (type: full)
-INFO  [logger] [logger] ./fs/log/2026-10-25/15_49_15.ulg
-INFO  [logger] Opened full log file: ./fs/log/2026-10-25/15_49_15.ulg
-INFO  [mavlink] MAVLink only on localhost (set param MAV_{i}_BROADCAST = 1 to enable network)
-INFO  [mavlink] MAVLink only on localhost (set param MAV_{i}_BROADCAST = 1 to enable network)
 INFO  [px4] Startup script returned successfully
-pxh> WARN  [health_and_arming_checks] Preflight Fail: no heading reference
-WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
-WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
-INFO  [mavlink] partner IP: 127.0.0.1
-WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
-WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
-WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
-WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
-WARN  [commander] Arming denied: Resolve system health failures first
-INFO  [tone_alarm] notify negative
-[2Kpxh> c[2Kpxh> co[2Kpxh> com[2Kpxh> comm[2Kpxh> comma[2Kpxh> comman[2Kpxh> command[2Kpxh> commande[2Kpxh> commander[2Kpxh> commander [2Kpxh> commander s[2Kpxh> commander st[2Kpxh> commander sta[2Kpxh> commander stat[2Kpxh> commander statu[2Kpxh> commander status
-INFO  [commander] Disarmed
-INFO  [commander] prearm safety: Off
-INFO  [commander] navigation mode: Offboard
-INFO  [commander] user intended navigation mode: Offboard
-INFO  [commander] in failsafe: no
-commander: cycle: 9803 events, 0us elapsed, 0.00us avg, min 0us max 0us 0.000us rms
-commander: preflight check: 1311 events, 0us elapsed, 0.00us avg, min 0us max 0us 0.000us rms
-pxh> WARN  [commander] Arming denied: Resolve system health failures first
-INFO  [tone_alarm] notify negative
-[2Kpxh> c[2Kpxh> co[2Kpxh> com[2Kpxh> comm[2Kpxh> comma[2Kpxh> comman[2Kpxh> command[2Kpxh> commande[2Kpxh> commander[2Kpxh> commander [2Kpxh> commander c[2Kpxh> commander ch[2Kpxh> commander che[2Kpxh> commander chec[2Kpxh> commander check
-INFO  [commander] Preflight check: FAILED
-pxh> [2Kpxh> c[2Kpxh> co[2Kpxh> com[2Kpxh> comm[2Kpxh> comma[2Kpxh> comman[2Kpxh> command[2Kpxh> commande[2Kpxh> commander[2Kpxh> commander [2Kpxh> commander s[2Kpxh> commander st[2Kpxh> commander sta[2Kpxh> commander stat[2Kpxh> commander statu[2Kpxh> commander status
-INFO  [commander] Disarmed
-INFO  [commander] prearm safety: Off
-INFO  [commander] navigation mode: Offboard
-INFO  [commander] user intended navigation mode: Offboard
-INFO  [commander] in failsafe: no
-commander: cycle: 12876 events, 0us elapsed, 0.00us avg, min 0us max 0us 0.000us rms
-commander: preflight check: 1872 events, 0us elapsed, 0.00us avg, min 0us max 0us 0.000us rms
-pxh> INFO  [commander] Connection to ground station lost
-WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
-INFO  [commander] GCS connection regained
-WARN  [commander] Arming denied: Resolve system health failures first
-INFO  [tone_alarm] notify negative
-[2Kpxh> c[2Kpxh> co[2Kpxh> com[2Kpxh> comm[2Kpxh> comma[2Kpxh> comman[2Kpxh> command[2Kpxh> commande[2Kpxh> commander[2Kpxh> commander [2Kpxh> commander c[2Kpxh> commander ch[2Kpxh> commander che[2Kpxh> commander chec[2Kpxh> commander check
-INFO  [commander] Preflight check: FAILED
-pxh> [2Kpxh> l[2Kpxh> li[2Kpxh> lis[2Kpxh> list[2Kpxh> liste[2Kpxh> listen[2Kpxh> listene[2Kpxh> listener[2Kpxh> listener [2Kpxh> listener e[2Kpxh> listener es[2Kpxh> listener est[2Kpxh> listener esti[2Kpxh> listener estim[2Kpxh> listener estima[2Kpxh> listener estimat[2Kpxh> listener estimato[2Kpxh> listener estimator[2Kpxh> listener estimator_[2Kpxh> listener estimator_s[2Kpxh> listener estimator_st[2Kpxh> listener estimator_sta[2Kpxh> listener estimator_stat[2Kpxh> listener estimator_statu[2Kpxh> listener estimator_status[2Kpxh> listener estimator_status_[2Kpxh> listener estimator_status_f[2Kpxh> listener estimator_status_fl[2Kpxh> listener estimator_status_fla[2Kpxh> listener estimator_status_flag[2Kpxh> listener estimator_status_flags[2Kpxh> listener estimator_status_flags [2Kpxh> listener estimator_status_flags -[2Kpxh> listener estimator_status_flags -n[2Kpxh> listener estimator_status_flags -n [2Kpxh> listener estimator_status_flags -n 1
 
-TOPIC: estimator_status_flags
- estimator_status_flags
-    timestamp: 204624000 (0.172000 seconds ago)
-    timestamp_sample: 204472000 (152000 us before timestamp)
-    control_status_changes: 10
-    fault_status_changes: 0
-    cs_tilt_align: True
-    cs_yaw_align: True
-    cs_gnss_pos: False
-    cs_opt_flow: False
-    cs_mag_hdg: True
-    cs_mag_3d: False
-    cs_mag_dec: True
-    cs_in_air: False
-    cs_wind: False
-    cs_baro_hgt: True
-    cs_rng_hgt: False
-    cs_gps_hgt: False
-    cs_ev_pos: False
-    cs_ev_yaw: False
-    cs_ev_hgt: False
-    cs_fuse_beta: False
-    cs_mag_field_disturbed: False
-    cs_fixed_wing: False
-    cs_mag_fault: False
-    cs_fuse_aspd: False
-    cs_gnd_effect: False
-    cs_rng_stuck: False
-    cs_gnss_yaw: False
-    cs_mag_aligned_in_flight: False
-    cs_ev_vel: False
-    cs_synthetic_mag_z: False
-    cs_vehicle_at_rest: True
-    cs_gnss_yaw_fault: False
-    cs_rng_fault: False
-    cs_inertial_dead_reckoning: True
-    cs_wind_dead_reckoning: False
-    cs_rng_kin_consistent: False
-    cs_fake_pos: False
-    cs_fake_hgt: False
-    cs_gravity_vector: True
-    cs_mag: True
-    cs_ev_yaw_fault: False
-    cs_mag_heading_consistent: True
-    cs_aux_gpos: False
-    cs_rng_terrain: False
-    cs_opt_flow_terrain: False
-    cs_valid_fake_pos: True
-    cs_constant_pos: False
-    cs_baro_fault: False
-    cs_gnss_vel: False
-    cs_gnss_fault: False
-    cs_yaw_manual: False
-    cs_gnss_hgt_fault: False
-    cs_in_transition: False
-    cs_heading_observable: True
-    fs_bad_mag_x: False
-    fs_bad_mag_y: False
-    fs_bad_mag_z: False
-    fs_bad_hdg: False
-    fs_bad_mag_decl: False
-    fs_bad_airspeed: False
-    fs_bad_sideslip: False
-    fs_bad_optflow_x: False
-    fs_bad_optflow_y: False
-    fs_bad_acc_vertical: False
-    fs_bad_acc_clipping: False
-
-pxh> [2Kpxh> l[2Kpxh> li[2Kpxh> lis[2Kpxh> list[2Kpxh> liste[2Kpxh> listen[2Kpxh> listene[2Kpxh> listener[2Kpxh> listener [2Kpxh> listener h[2Kpxh> listener he[2Kpxh> listener hea[2Kpxh> listener heal[2Kpxh> listener healt[2Kpxh> listener health[2Kpxh> listener health_[2Kpxh> listener health_r[2Kpxh> listener health_re[2Kpxh> listener health_rep[2Kpxh> listener health_repo[2Kpxh> listener health_repor[2Kpxh> listener health_report[2Kpxh> listener health_report [2Kpxh> listener health_report -[2Kpxh> listener health_report -n[2Kpxh> listener health_report -n [2Kpxh> listener health_report -n 1
-
-TOPIC: health_report
- health_report
-    timestamp: 204800000 (4.912000 seconds ago)
-    can_arm_mode_flags: 79872 (0b1'0011'1000'0000'0000)
-    can_run_mode_flags: 79872 (0b1'0011'1000'0000'0000)
-    health_is_present_flags: 939662594 (0b11'1000'0000'0010'0001'1101'0000'0010)
-    health_warning_flags: 0
-    health_error_flags: 0
-    arming_check_warning_flags: 128 (0b1000'0000)
-    arming_check_error_flags: 17956864 (0b1'0001'0010'0000'0000'0000'0000)
-pxh> INFO  [commander] Connection to ground station lost
-WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
-[2Kpxh> p[2Kpxh> pa[2Kpxh> par[2Kpxh> para[2Kpxh> param[2Kpxh> param [2Kpxh> param s[2Kpxh> param sh[2Kpxh> param sho[2Kpxh> param show[2Kpxh> param show [2Kpxh> param show C[2Kpxh> param show CO[2Kpxh> param show COM[2Kpxh> param show COM_[2Kpxh> param show COM_A[2Kpxh> param show COM_AR[2Kpxh> param show COM_ARM[2Kpxh> param show COM_ARM_[2Kpxh> param show COM_ARM_W[2Kpxh> param show COM_ARM_WO[2Kpxh> param show COM_ARM_WO_[2Kpxh> param show COM_ARM_WO_G[2Kpxh> param show COM_ARM_WO_GP[2Kpxh> param show COM_ARM_WO_GPS
-Symbols: x = used, + = saved, * = unsaved, l = locked
-x     COM_ARM_WO_GPS [276,488] : 1
-
- 1155/2109 parameters used.
-pxh> [2Kpxh> p[2Kpxh> pa[2Kpxh> par[2Kpxh> para[2Kpxh> param[2Kpxh> param [2Kpxh> param s[2Kpxh> param sh[2Kpxh> param sho[2Kpxh> param show[2Kpxh> param show [2Kpxh> param show S[2Kpxh> param show SY[2Kpxh> param show SYS[2Kpxh> param show SYS_[2Kpxh> param show SYS_H[2Kpxh> param show SYS_HA[2Kpxh> param show SYS_HAS[2Kpxh> param show SYS_HAS_[2Kpxh> param show SYS_HAS_N[2Kpxh> param show SYS_HAS_NU[2Kpxh> param show SYS_HAS_NUM[2Kpxh> param show SYS_HAS_NUM_[2Kpxh> param show SYS_HAS_NUM_G[2Kpxh> param show SYS_HAS_NUM_GN[2Kpxh> param show SYS_HAS_NUM_GNS[2Kpxh> param show SYS_HAS_NUM_GNSS
-Symbols: x = used, + = saved, * = unsaved, l = locked
-x     SYS_HAS_NUM_GNSS [1102,1715] : 0
-
- 1155/2109 parameters used.
-pxh> INFO  [commander] GCS connection regained
-[2Kpxh> l[2Kpxh> li[2Kpxh> lis[2Kpxh> list[2Kpxh> liste[2Kpxh> listen[2Kpxh> listene[2Kpxh> listener[2Kpxh> listener [2Kpxh> listener v[2Kpxh> listener ve[2Kpxh> listener veh[2Kpxh> listener vehi[2Kpxh> listener vehic[2Kpxh> listener vehicl[2Kpxh> listener vehicle[2Kpxh> listener vehicle_[2Kpxh> listener vehicle_v[2Kpxh> listener vehicle_vi[2Kpxh> listener vehicle_vis[2Kpxh> listener vehicle_visu[2Kpxh> listener vehicle_visua[2Kpxh> listener vehicle_visual[2Kpxh> listener vehicle_visual_[2Kpxh> listener vehicle_visual_o[2Kpxh> listener vehicle_visual_od[2Kpxh> listener vehicle_visual_odo[2Kpxh> listener vehicle_visual_odom[2Kpxh> listener vehicle_visual_odome[2Kpxh> listener vehicle_visual_odomet[2Kpxh> listener vehicle_visual_odometr[2Kpxh> listener vehicle_visual_odometry[2Kpxh> listener vehicle_visual_odometry [2Kpxh> listener vehicle_visual_odometry -[2Kpxh> listener vehicle_visual_odometry -n[2Kpxh> listener vehicle_visual_odometry -n [2Kpxh> listener vehicle_visual_odometry -n 1
-
-TOPIC: vehicle_visual_odometry
- vehicle_visual_odometry
-    timestamp: 276932000 (0.004000 seconds ago)
-    timestamp_sample: 276932000 (0 us before timestamp)
-    position: [-0.00000, -0.00000, 0.01300]
-    q: [0.70711, 0.00000, 0.00000, 0.70711] (Roll: 0.0 deg, Pitch: -0.0 deg, Yaw: 90.0 deg)
-    velocity: [0.00000, 0.00000, -0.00000]
-    angular_velocity: [0.00000, -0.00000, -0.00000]
-    position_variance: [0.01000, 0.01000, 0.02000]
-    orientation_variance: [0.01000, 0.01000, 0.02000]
-    velocity_variance: [0.04000, 0.04000, 0.06000]
-    pose_frame: 1
-    velocity_frame: 1
-    reset_counter: 0
-    quality: 95
-
-pxh> [2Kpxh> l[2Kpxh> li[2Kpxh> lis[2Kpxh> list[2Kpxh> liste[2Kpxh> listen[2Kpxh> listene[2Kpxh> listener[2Kpxh> listener [2Kpxh> listener e[2Kpxh> listener es[2Kpxh> listener est[2Kpxh> listener esti[2Kpxh> listener estim[2Kpxh> listener estima[2Kpxh> listener estimat[2Kpxh> listener estimato[2Kpxh> listener estimator[2Kpxh> listener estimator_[2Kpxh> listener estimator_s[2Kpxh> listener estimator_st[2Kpxh> listener estimator_sta[2Kpxh> listener estimator_stat[2Kpxh> listener estimator_statu[2Kpxh> listener estimator_status[2Kpxh> listener estimator_status_[2Kpxh> listener estimator_status_f[2Kpxh> listener estimator_status_fl[2Kpxh> listener estimator_status_fla[2Kpxh> listener estimator_status_flag[2Kpxh> listener estimator_status_flags[2Kpxh> listener estimator_status_flags [2Kpxh> listener estimator_status_flags -[2Kpxh> listener estimator_status_flags -n[2Kpxh> listener estimator_status_flags -n [2Kpxh> listener estimator_status_flags -n 1
-
-TOPIC: estimator_status_flags
- estimator_status_flags
-    timestamp: 276624000 (0.312000 seconds ago)
-    timestamp_sample: 276472000 (152000 us before timestamp)
-    control_status_changes: 10
-    fault_status_changes: 0
-    cs_tilt_align: True
-    cs_yaw_align: True
-    cs_gnss_pos: False
-    cs_opt_flow: False
-    cs_mag_hdg: True
-    cs_mag_3d: False
-    cs_mag_dec: True
-    cs_in_air: False
-    cs_wind: False
-    cs_baro_hgt: True
-    cs_rng_hgt: False
-    cs_gps_hgt: False
-    cs_ev_pos: False
-    cs_ev_yaw: False
-    cs_ev_hgt: False
-    cs_fuse_beta: False
-    cs_mag_field_disturbed: False
-    cs_fixed_wing: False
-    cs_mag_fault: False
-    cs_fuse_aspd: False
-    cs_gnd_effect: False
-    cs_rng_stuck: False
-    cs_gnss_yaw: False
-    cs_mag_aligned_in_flight: False
-    cs_ev_vel: False
-    cs_synthetic_mag_z: False
-    cs_vehicle_at_rest: True
-    cs_gnss_yaw_fault: False
-    cs_rng_fault: False
-    cs_inertial_dead_reckoning: True
-    cs_wind_dead_reckoning: False
-    cs_rng_kin_consistent: False
-    cs_fake_pos: False
-    cs_fake_hgt: False
-    cs_gravity_vector: True
-    cs_mag: True
-    cs_ev_yaw_fault: False
-    cs_mag_heading_consistent: True
-    cs_aux_gpos: False
-    cs_rng_terrain: False
-    cs_opt_flow_terrain: False
-    cs_valid_fake_pos: True
-    cs_constant_pos: False
-    cs_baro_fault: False
-    cs_gnss_vel: False
-    cs_gnss_fault: False
-    cs_yaw_manual: False
-    cs_gnss_hgt_fault: False
-    cs_in_transition: False
-    cs_heading_observable: True
-    fs_bad_mag_x: False
-    fs_bad_mag_y: False
-    fs_bad_mag_z: False
-    fs_bad_hdg: False
-    fs_bad_mag_decl: False
-    fs_bad_airspeed: False
-    fs_bad_sideslip: False
-    fs_bad_optflow_x: False
-    fs_bad_optflow_y: False
-    fs_bad_acc_vertical: False
-    fs_bad_acc_clipping: False
-
-pxh> [2Kpxh> l[2Kpxh> li[2Kpxh> lis[2Kpxh> list[2Kpxh> liste[2Kpxh> listen[2Kpxh> listene[2Kpxh> listener[2Kpxh> listener [2Kpxh> listener e[2Kpxh> listener es[2Kpxh> listener est[2Kpxh> listener esti[2Kpxh> listener estim[2Kpxh> listener estima[2Kpxh> listener estimat[2Kpxh> listener estimato[2Kpxh> listener estimator[2Kpxh> listener estimator_[2Kpxh> listener estimator_e[2Kpxh> listener estimator_ev[2Kpxh> listener estimator_eve[2Kpxh> listener estimator_even[2Kpxh> listener estimator_event[2Kpxh> listener estimator_event_[2Kpxh> listener estimator_event_f[2Kpxh> listener estimator_event_fl[2Kpxh> listener estimator_event_fla[2Kpxh> listener estimator_event_flag[2Kpxh> listener estimator_event_flags[2Kpxh> listener estimator_event_flags [2Kpxh> listener estimator_event_flags -[2Kpxh> listener estimator_event_flags -n[2Kpxh> listener estimator_event_flags -n [2Kpxh> listener estimator_event_flags -n 1
-
-TOPIC: estimator_event_flags
- estimator_event_flags
-    timestamp: 276624000 (0.312000 seconds ago)
-    timestamp_sample: 107472000 (169152000 us before timestamp)
-    information_event_changes: 5
-    gps_checks_passed: False
-    reset_vel_to_gps: False
-    reset_vel_to_flow: False
-    reset_vel_to_vision: False
-    reset_vel_to_zero: True
-    reset_pos_to_last_known: True
-    reset_pos_to_gps: False
-    reset_pos_to_vision: False
-    starting_gps_fusion: False
-    starting_vision_pos_fusion: False
-    starting_vision_vel_fusion: False
-    starting_vision_yaw_fusion: False
-    yaw_aligned_to_imu_gps: False
-    reset_hgt_to_baro: False
-    reset_hgt_to_gps: False
-    reset_hgt_to_rng: False
-    reset_hgt_to_ev: False
-
-pxh> [2Kpxh> p[2Kpxh> pa[2Kpxh> par[2Kpxh> para[2Kpxh> param[2Kpxh> param [2Kpxh> param s[2Kpxh> param sh[2Kpxh> param sho[2Kpxh> param show[2Kpxh> param show [2Kpxh> param show E[2Kpxh> param show EK[2Kpxh> param show EKF[2Kpxh> param show EKF2[2Kpxh> param show EKF2_[2Kpxh> param show EKF2_E[2Kpxh> param show EKF2_EV[2Kpxh> param show EKF2_EV_[2Kpxh> param show EKF2_EV_C[2Kpxh> param show EKF2_EV_CT[2Kpxh> param show EKF2_EV_CTR[2Kpxh> param show EKF2_EV_CTRL
-Symbols: x = used, + = saved, * = unsaved, l = locked
-x +   EKF2_EV_CTRL [387,619] : 1097859072
-
- 1155/2109 parameters used.
-pxh> [2Kpxh> p[2Kpxh> pa[2Kpxh> par[2Kpxh> para[2Kpxh> param[2Kpxh> param [2Kpxh> param s[2Kpxh> param sh[2Kpxh> param sho[2Kpxh> param show[2Kpxh> param show [2Kpxh> param show E[2Kpxh> param show EK[2Kpxh> param show EKF[2Kpxh> param show EKF2[2Kpxh> param show EKF2_[2Kpxh> param show EKF2_H[2Kpxh> param show EKF2_HG[2Kpxh> param show EKF2_HGT[2Kpxh> param show EKF2_HGT_[2Kpxh> param show EKF2_HGT_R[2Kpxh> param show EKF2_HGT_RE[2Kpxh> param show EKF2_HGT_REF
-Symbols: x = used, + = saved, * = unsaved, l = locked
-x     EKF2_HGT_REF [412,644] : 1
-
- 1155/2109 parameters used.
-pxh> WARN  [commander] Arming denied: Resolve system health failures first
-INFO  [tone_alarm] notify negative
-ERROR [mavlink] param types mismatch param: EKF2_EV_CTRL
-ERROR [mavlink] param types mismatch param: EKF2_EV_CTRL
-ERROR [mavlink] param types mismatch param: EKF2_EV_CTRL
-ERROR [mavlink] param types mismatch param: EKF2_EV_CTRL
-ERROR [mavlink] param types mismatch param: EKF2_EV_CTRL
-ERROR [mavlink] param types mismatch param: EKF2_EV_CTRL
-ERROR [mavlink] param types mismatch param: EKF2_EV_CTRL
-ERROR [mavlink] param types mismatch param: EKF2_EV_CTRL
-[2Kpxh> p[2Kpxh> pa[2Kpxh> par[2Kpxh> para[2Kpxh> param[2Kpxh> param [2Kpxh> param s[2Kpxh> param sh[2Kpxh> param sho[2Kpxh> param show[2Kpxh> param show [2Kpxh> param show E[2Kpxh> param show EK[2Kpxh> param show EKF[2Kpxh> param show EKF2[2Kpxh> param show EKF2_[2Kpxh> param show EKF2_E[2Kpxh> param show EKF2_EV[2Kpxh> param show EKF2_EV_[2Kpxh> param show EKF2_EV_C[2Kpxh> param show EKF2_EV_CT[2Kpxh> param show EKF2_EV_CTR[2Kpxh> param show EKF2_EV_CTRL
-Symbols: x = used, + = saved, * = unsaved, l = locked
-x +   EKF2_EV_CTRL [387,619] : 1097859072
-
- 1155/2109 parameters used.
-pxh> INFO  [commander] Connection to ground station lost
-WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
-INFO  [commander] GCS connection regained
-INFO  [commander] [32mReady for takeoff![0m
+M6-T03 GPS-denied mission:
+INFO  [commander] Ready for takeoff!
 INFO  [commander] Armed by external command
-INFO  [tone_alarm] arming warning
 INFO  [commander] Takeoff detected
 INFO  [commander] Landing detected
 INFO  [commander] Disarmed by landing
-INFO  [tone_alarm] notify neutral
-INFO  [logger] closed logfile, bytes written: 73024569
-INFO  [commander] Connection to ground station lost
-WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
+
+M6-T04 estimator-loss injection:
+INFO  [commander] Armed by external command
+INFO  [commander] Takeoff detected
+WARN  [mc_pos_control] invalid setpoints
+WARN  [mc_pos_control] Failsafe: blind land
+WARN  [failsafe] Failsafe activated
+INFO  [commander] Landing detected
+INFO  [commander] Disarmed by landing
+INFO  [logger] closed logfile, bytes written: 3190514
+Exiting NOW.

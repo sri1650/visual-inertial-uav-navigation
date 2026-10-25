@@ -1,0 +1,20 @@
+{
+  "status": "pass",
+  "injected_fault": "external_vision_stream_stopped",
+  "vision_messages_before_loss": 399,
+  "mode_before_loss": "OFFBOARD",
+  "failsafe_mode": "DESCEND",
+  "failsafe_status_texts": [
+    "Failsafe activated\t"
+  ],
+  "transition_latency_s": 0.658,
+  "landed_disarmed": true,
+  "ekf2_noaid_timeout_us": 500000,
+  "policy": {
+    "degraded_max_duration_ms": 500,
+    "estimator_timeout_ms": 250,
+    "lost_action": "request_position_hold_or_land"
+  },
+  "duration_s": 22.321,
+  "simulation_only": true
+}
