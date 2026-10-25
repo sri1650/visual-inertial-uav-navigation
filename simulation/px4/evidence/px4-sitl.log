@@ -1,0 +1,64 @@
+[0/1] cd /Users/sricharankumba/Documents/Codex/dependencies/PX4-main-setup/build/px4_sitl_default/src/modules/simulation/gz_bridge && /opt/homebrew/bin/cmake -E env PX4_SIM_MODEL=gz_x500 GZ_IP=127.0.0.1 /Users/sricharankumba/Documents/Codex/dependencies/PX4-main-setup/build/px4_sitl_default/bin/px4
+
+______  __   __    ___ 
+| ___ \ \ \ / /   /   |
+| |_/ /  \ V /   / /| |
+|  __/   /   \  / /_| |
+| |     / /^\ \ \___  |
+\_|     \/   \/     |_/
+
+px4 starting.
+
+INFO  [px4] startup script: /bin/sh etc/init.d-posix/rcS 0
+INFO  [init] found model autostart file as SYS_AUTOSTART=4001
+INFO  [param] selected parameter default file fs/parameters.bson
+INFO  [param] importing from 'fs/parameters.bson'
+INFO  [parameters] BSON document size 108 bytes, decoded 108 bytes (INT32:3, FLOAT:2)
+INFO  [param] selected parameter backup file fs/parameters_backup.bson
+INFO  [dataman] data manager file './fs/dataman' size is 1208528 bytes
+INFO  [init] Gazebo simulator 8.10.0
+INFO  [init] Standalone PX4 launch, waiting for Gazebo
+INFO  [init] Gazebo world is ready
+INFO  [init] Spawning Gazebo model
+INFO  [lockstep_scheduler] setting initial absolute time to 11156000 us
+INFO  [gz_bridge] world: default, model: x500_0
+INFO  [gz_bridge] Subscribed to IMU[0]: /world/default/model/x500_0/link/base_link/sensor/imu_sensor/imu
+INFO  [gz_bridge] Subscribed to IMU[1]: /world/default/model/x500_0/link/base_link/sensor/imu_sensor_1/imu
+INFO  [gz_bridge] Subscribed to IMU[2]: /world/default/model/x500_0/link/base_link/sensor/imu_sensor_2/imu
+INFO  [gz_bridge] Subscribed to Magnetometer[0]: /world/default/model/x500_0/link/base_link/sensor/magnetometer_sensor/magneto
+INFO  [gz_bridge] Subscribed to Magnetometer[1]: /world/default/model/x500_0/link/base_link/sensor/magnetometer_sensor_1/magne
+INFO  [gz_bridge] Subscribed to GPS[0]: /world/default/model/x500_0/link/base_link/sensor/navsat_sensor/navsat
+INFO  [gz_bridge] Subscribed to GPS[1]: /world/default/model/x500_0/link/base_link/sensor/navsat_sensor_1/navsat
+INFO  [gz_bridge] Subscribed to Barometer[0]: /world/default/model/x500_0/link/base_link/sensor/air_pressure_sensor/air_pressu
+INFO  [gz_bridge] Subscribed to Barometer[1]: /world/default/model/x500_0/link/base_link/sensor/air_pressure_sensor_1/air_pres
+INFO  [init] Setting camera to follow x500_0
+INFO  [init] Camera follow offset set to -2.0, -2.0, 2.0
+INFO  [commander] LED: open /dev/led0 failed (22)
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
+INFO  [uxrce_dds_client] init UDP agent IP:127.0.0.1, port:8888
+INFO  [tone_alarm] home set
+INFO  [mavlink] mode: Normal, data rate: 4000000 B/s on udp port 18570 remote port 14550
+INFO  [mavlink] mode: Onboard, data rate: 4000000 B/s on udp port 14580 remote port 14540
+INFO  [mavlink] mode: Onboard, data rate: 4000 B/s on udp port 14280 remote port 14030
+INFO  [mavlink] mode: Gimbal, data rate: 400000 B/s on udp port 13030 remote port 13280
+INFO  [logger] logger started (mode=all)
+INFO  [logger] Max log file size: 1024 MiB
+INFO  [logger] Start file log (type: full)
+INFO  [logger] [logger] ./fs/log/2026-10-25/15_44_21.ulg	
+INFO  [logger] Opened full log file: ./fs/log/2026-10-25/15_44_21.ulg
+INFO  [mavlink] MAVLink only on localhost (set param MAV_{i}_BROADCAST = 1 to enable network)
+INFO  [mavlink] MAVLink only on localhost (set param MAV_{i}_BROADCAST = 1 to enable network)
+INFO  [px4] Startup script returned successfully
+pxh> WARN  [health_and_arming_checks] Preflight Fail: no heading reference
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
+[2Kpxh> c[2Kpxh> co[2Kpxh> com[2Kpxh> comm[2Kpxh> comma[2Kpxh> comman[2Kpxh> command[2Kpxh> commande[2Kpxh> commander[2Kpxh> commander [2Kpxh> commander s[2Kpxh> commander st[2Kpxh> commander sta[2Kpxh> commander stat[2Kpxh> commander statu[2Kpxh> commander status
+INFO  [commander] Disarmed
+INFO  [commander] prearm safety: Off
+INFO  [commander] navigation mode: Hold
+INFO  [commander] user intended navigation mode: Hold
+INFO  [commander] in failsafe: no
+commander: cycle: 1017 events, 0us elapsed, 0.00us avg, min 0us max 0us 0.000us rms
+commander: preflight check: 113 events, 0us elapsed, 0.00us avg, min 0us max 0us 0.000us rms
+pxh> [2Kpxh> s[2Kpxh> sh[2Kpxh> shu[2Kpxh> shut[2Kpxh> shutd[2Kpxh> shutdo[2Kpxh> shutdow[2Kpxh> shutdown
+Exiting NOW.

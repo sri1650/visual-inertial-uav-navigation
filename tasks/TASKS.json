@@ -257,7 +257,7 @@
     {
       "id": "M6-T01",
       "title": "Add PX4 SITL/Gazebo environment",
-      "status": "todo",
+      "status": "done",
       "dependencies": [
         "M4-T04"
       ],
