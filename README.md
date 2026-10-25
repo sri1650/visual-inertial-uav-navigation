@@ -45,6 +45,8 @@ A portfolio-grade robotics software project for **GPS-denied aerial navigation**
 
 ## Architecture
 
+See the [detailed architecture and SITL sequence diagrams](docs/architecture.md) and the [measured benchmark report](docs/benchmark.md).
+
 ```mermaid
 flowchart LR
   CAM[Camera] --> SYNC[Time Sync]

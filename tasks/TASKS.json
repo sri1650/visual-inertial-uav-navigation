@@ -452,7 +452,7 @@
     {
       "id": "M10-T02",
       "title": "Publish benchmark report and architecture diagrams",
-      "status": "todo",
+      "status": "done",
       "dependencies": [
         "M10-T01"
       ],

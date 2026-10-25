@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-25",
+  "environment": {
+    "architecture": "arm64",
+    "os": "macOS 27.0.1",
+    "python": "3.13.12",
+    "opencv": "5.0.0",
+    "compiler": "Apple Clang 21.0.0"
+  },
+  "tests": {
+    "python_passed": 57,
+    "cpp_passed": 9
+  },
+  "frontend_100_frames": {
+    "mean_ms": 1.38693914,
+    "p50_ms": 1.3697505,
+    "p95_ms": 1.44468685,
+    "max_ms": 2.651042,
+    "mean_features": 154.76
+  },
+  "resources_100_frames": {
+    "mean_wall_ms_per_frame": 2.18628084,
+    "cpu_s": 0.395746,
+    "rss_before_mb": 53.21875,
+    "rss_after_mb": 78.34375,
+    "max_rss_mb": 78.34375
+  },
+  "euroc": {
+    "ate_rmse_m": null,
+    "rpe_translation_rmse_m": null,
+    "status": "not measured: no end-to-end EuRoC estimator runner"
+  },
+  "px4_sitl": {
+    "waypoints_completed": 5,
+    "maximum_waypoint_error_m": 0.8828268643499211,
+    "mission_duration_s": 32.474,
+    "failsafe_action": "DESCEND",
+    "failsafe_transition_latency_s": 0.658,
+    "landed_disarmed": true
+  },
+  "validation_boundary": "workstation and PX4/Gazebo SITL only"
+}
