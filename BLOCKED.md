@@ -1,5 +1,19 @@
 # Blocked work
 
+## Resolved: M6-T03 PX4 GPS-denied mission arming gate
+
+- Date: 2026-10-25
+- Task: `M6-T03`
+- Exact command: `CONDA_PREFIX=/Users/sricharankumba/Documents/Codex/dependencies/PX4-main-setup/Tools/setup/macos/.pixi/envs/default PYTHONPATH=$CONDA_PREFIX/lib/python3.13/site-packages GZ_IP=127.0.0.1 .venv/bin/python tools/run_gps_denied_mission.py`
+- Error: `RuntimeError: PX4 did not arm in Offboard mode`; PX4 reports `Arming denied: Resolve system health failures first` and `Preflight check: FAILED`.
+- Files involved: `tools/run_gps_denied_mission.py`, `src/vionav/mission.py`, `simulation/px4/gps_denied_mission.json`, and `simulation/px4/evidence/px4-sitl.log`.
+- Observed state: the GCS link is recognized, GPS fusion is disabled, estimator heading is aligned, and PX4's health report retains arming errors for the system, local-position-estimate, and global-position-estimate components (`arming_check_error_flags=17956864`).
+- Root cause: MAVLink integer parameters use byte-wise encoding in the float transport field. Sending numeric `15.0` with type `INT32` stored its IEEE-754 bits (`1097859072`) as `EKF2_EV_CTRL`, silently disabling vision fusion.
+- Attempts:
+  1. Changed the mission link from onboard-controller identity to a proper GCS/mission-planner identity, clearing the persistent `No connection to the GCS` condition.
+  2. Enabled the external-vision yaw fusion bit (`EKF2_EV_CTRL=15`) in addition to position, height, and velocity fusion; PX4 still rejected arming.
+- Escalation and resolution: a live read-only estimator snapshot exposed the corrupted parameter. Encoding and decoding the integer through its four wire bytes restored `EKF2_EV_CTRL=15`; the five-waypoint mission then completed and landed cleanly.
+
 ## Resolved: PX4 v1.17.0 native Gazebo build (superseded path)
 
 - Date: 2026-10-25

@@ -281,7 +281,7 @@
     {
       "id": "M6-T03",
       "title": "Implement GPS-denied waypoint scenario",
-      "status": "todo",
+      "status": "done",
       "dependencies": [
         "M6-T02"
       ],

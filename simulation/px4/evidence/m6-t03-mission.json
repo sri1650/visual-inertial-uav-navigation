@@ -1,0 +1,56 @@
+{
+  "status": "pass",
+  "gps_fusion_parameter": 0,
+  "external_vision_parameter": 15,
+  "waypoints": [
+    {
+      "index": 0,
+      "target_ned_m": [
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "error_m": 0.586061424045668
+    },
+    {
+      "index": 1,
+      "target_ned_m": [
+        5.0,
+        0.0,
+        -2.0
+      ],
+      "error_m": 0.8828268643499211
+    },
+    {
+      "index": 2,
+      "target_ned_m": [
+        5.0,
+        5.0,
+        -2.0
+      ],
+      "error_m": 0.8166548540437911
+    },
+    {
+      "index": 3,
+      "target_ned_m": [
+        0.0,
+        5.0,
+        -2.0
+      ],
+      "error_m": 0.817043371301187
+    },
+    {
+      "index": 4,
+      "target_ned_m": [
+        0.0,
+        0.0,
+        -2.0
+      ],
+      "error_m": 0.8742312884632482
+    }
+  ],
+  "messages_sent": 840,
+  "duration_s": 32.474,
+  "landed_disarmed": true,
+  "simulation_only": true
+}
