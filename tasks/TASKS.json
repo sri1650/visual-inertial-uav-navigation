@@ -269,7 +269,7 @@
     {
       "id": "M6-T02",
       "title": "Implement MAVLink/MAVSDK navigation bridge",
-      "status": "todo",
+      "status": "done",
       "dependencies": [
         "M6-T01"
       ],

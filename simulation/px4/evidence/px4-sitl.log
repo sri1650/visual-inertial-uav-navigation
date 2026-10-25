@@ -20,7 +20,7 @@ INFO  [init] Gazebo simulator 8.10.0
 INFO  [init] Standalone PX4 launch, waiting for Gazebo
 INFO  [init] Gazebo world is ready
 INFO  [init] Spawning Gazebo model
-INFO  [lockstep_scheduler] setting initial absolute time to 11156000 us
+INFO  [lockstep_scheduler] setting initial absolute time to 11108000 us
 INFO  [gz_bridge] world: default, model: x500_0
 INFO  [gz_bridge] Subscribed to IMU[0]: /world/default/model/x500_0/link/base_link/sensor/imu_sensor/imu
 INFO  [gz_bridge] Subscribed to IMU[1]: /world/default/model/x500_0/link/base_link/sensor/imu_sensor_1/imu
@@ -44,21 +44,107 @@ INFO  [mavlink] mode: Gimbal, data rate: 400000 B/s on udp port 13030 remote por
 INFO  [logger] logger started (mode=all)
 INFO  [logger] Max log file size: 1024 MiB
 INFO  [logger] Start file log (type: full)
-INFO  [logger] [logger] ./fs/log/2026-10-25/15_44_21.ulg	
-INFO  [logger] Opened full log file: ./fs/log/2026-10-25/15_44_21.ulg
+INFO  [logger] [logger] ./fs/log/2026-10-25/15_46_55.ulg
+INFO  [logger] Opened full log file: ./fs/log/2026-10-25/15_46_55.ulg
 INFO  [mavlink] MAVLink only on localhost (set param MAV_{i}_BROADCAST = 1 to enable network)
 INFO  [mavlink] MAVLink only on localhost (set param MAV_{i}_BROADCAST = 1 to enable network)
 INFO  [px4] Startup script returned successfully
 pxh> WARN  [health_and_arming_checks] Preflight Fail: no heading reference
 WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
 WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
-[2Kpxh> c[2Kpxh> co[2Kpxh> com[2Kpxh> comm[2Kpxh> comma[2Kpxh> comman[2Kpxh> command[2Kpxh> commande[2Kpxh> commander[2Kpxh> commander [2Kpxh> commander s[2Kpxh> commander st[2Kpxh> commander sta[2Kpxh> commander stat[2Kpxh> commander statu[2Kpxh> commander status
-INFO  [commander] Disarmed
-INFO  [commander] prearm safety: Off
-INFO  [commander] navigation mode: Hold
-INFO  [commander] user intended navigation mode: Hold
-INFO  [commander] in failsafe: no
-commander: cycle: 1017 events, 0us elapsed, 0.00us avg, min 0us max 0us 0.000us rms
-commander: preflight check: 113 events, 0us elapsed, 0.00us avg, min 0us max 0us 0.000us rms
+INFO  [mavlink] partner IP: 127.0.0.1
+[2Kpxh> l[2Kpxh> li[2Kpxh> lis[2Kpxh> list[2Kpxh> liste[2Kpxh> listen[2Kpxh> listene[2Kpxh> listener[2Kpxh> listener [2Kpxh> listener v[2Kpxh> listener ve[2Kpxh> listener veh[2Kpxh> listener vehi[2Kpxh> listener vehic[2Kpxh> listener vehicl[2Kpxh> listener vehicle[2Kpxh> listener vehicle_[2Kpxh> listener vehicle_v[2Kpxh> listener vehicle_vi[2Kpxh> listener vehicle_vis[2Kpxh> listener vehicle_visu[2Kpxh> listener vehicle_visua[2Kpxh> listener vehicle_visual[2Kpxh> listener vehicle_visual_[2Kpxh> listener vehicle_visual_o[2Kpxh> listener vehicle_visual_od[2Kpxh> listener vehicle_visual_odo[2Kpxh> listener vehicle_visual_odom[2Kpxh> listener vehicle_visual_odome[2Kpxh> listener vehicle_visual_odomet[2Kpxh> listener vehicle_visual_odometr[2Kpxh> listener vehicle_visual_odometry[2Kpxh> listener vehicle_visual_odometry [2Kpxh> listener vehicle_visual_odometry -[2Kpxh> listener vehicle_visual_odometry -n[2Kpxh> listener vehicle_visual_odometry -n [2Kpxh> listener vehicle_visual_odometry -n 1
+
+TOPIC: vehicle_visual_odometry
+ vehicle_visual_odometry
+    timestamp: 28696000 (0.024000 seconds ago)
+    timestamp_sample: 28696000 (0 us before timestamp)
+    position: [0.00000, 0.00000, -0.00000]
+    q: [0.70711, -0.00000, -0.00000, 0.70711] (Roll: -0.0 deg, Pitch: -0.0 deg, Yaw: 90.0 deg)
+    velocity: [0.00000, 0.00000, -0.00000]
+    angular_velocity: [0.00000, -0.00000, -0.00000]
+    position_variance: [0.01000, 0.01000, 0.02000]
+    orientation_variance: [0.01000, 0.01000, 0.02000]
+    velocity_variance: [0.04000, 0.04000, 0.06000]
+    pose_frame: 1
+    velocity_frame: 1
+    reset_counter: 0
+    quality: 90
+
+pxh> [2Kpxh> p[2Kpxh> pa[2Kpxh> par[2Kpxh> para[2Kpxh> param[2Kpxh> param [2Kpxh> param s[2Kpxh> param se[2Kpxh> param set[2Kpxh> param set [2Kpxh> param set E[2Kpxh> param set EK[2Kpxh> param set EKF[2Kpxh> param set EKF2[2Kpxh> param set EKF2_[2Kpxh> param set EKF2_E[2Kpxh> param set EKF2_EV[2Kpxh> param set EKF2_EV_[2Kpxh> param set EKF2_EV_C[2Kpxh> param set EKF2_EV_CT[2Kpxh> param set EKF2_EV_CTR[2Kpxh> param set EKF2_EV_CTRL[2Kpxh> param set EKF2_EV_CTRL [2Kpxh> param set EKF2_EV_CTRL 7
+  EKF2_EV_CTRL: curr: 0 -> new: 7
+pxh> WARN  [health_and_arming_checks] Preflight Fail: height estimate not stable
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
+WARN  [health_and_arming_checks] Preflight Fail: No connection to the GCS
+[2Kpxh> l[2Kpxh> li[2Kpxh> lis[2Kpxh> list[2Kpxh> liste[2Kpxh> listen[2Kpxh> listene[2Kpxh> listener[2Kpxh> listener [2Kpxh> listener e[2Kpxh> listener es[2Kpxh> listener est[2Kpxh> listener esti[2Kpxh> listener estim[2Kpxh> listener estima[2Kpxh> listener estimat[2Kpxh> listener estimato[2Kpxh> listener estimator[2Kpxh> listener estimator_[2Kpxh> listener estimator_s[2Kpxh> listener estimator_st[2Kpxh> listener estimator_sta[2Kpxh> listener estimator_stat[2Kpxh> listener estimator_statu[2Kpxh> listener estimator_status[2Kpxh> listener estimator_status_[2Kpxh> listener estimator_status_f[2Kpxh> listener estimator_status_fl[2Kpxh> listener estimator_status_fla[2Kpxh> listener estimator_status_flag[2Kpxh> listener estimator_status_flags[2Kpxh> listener estimator_status_flags [2Kpxh> listener estimator_status_flags -[2Kpxh> listener estimator_status_flags -n[2Kpxh> listener estimator_status_flags -n [2Kpxh> listener estimator_status_flags -n 1
+
+TOPIC: estimator_status_flags
+ estimator_status_flags
+    timestamp: 53820000 (0.076000 seconds ago)
+    timestamp_sample: 53668000 (152000 us before timestamp)
+    control_status_changes: 10
+    fault_status_changes: 0
+    cs_tilt_align: True
+    cs_yaw_align: True
+    cs_gnss_pos: True
+    cs_opt_flow: False
+    cs_mag_hdg: True
+    cs_mag_3d: False
+    cs_mag_dec: True
+    cs_in_air: False
+    cs_wind: False
+    cs_baro_hgt: True
+    cs_rng_hgt: False
+    cs_gps_hgt: True
+    cs_ev_pos: True
+    cs_ev_yaw: False
+    cs_ev_hgt: True
+    cs_fuse_beta: False
+    cs_mag_field_disturbed: False
+    cs_fixed_wing: False
+    cs_mag_fault: False
+    cs_fuse_aspd: False
+    cs_gnd_effect: False
+    cs_rng_stuck: False
+    cs_gnss_yaw: False
+    cs_mag_aligned_in_flight: False
+    cs_ev_vel: True
+    cs_synthetic_mag_z: False
+    cs_vehicle_at_rest: True
+    cs_gnss_yaw_fault: False
+    cs_rng_fault: False
+    cs_inertial_dead_reckoning: False
+    cs_wind_dead_reckoning: False
+    cs_rng_kin_consistent: False
+    cs_fake_pos: False
+    cs_fake_hgt: False
+    cs_gravity_vector: False
+    cs_mag: True
+    cs_ev_yaw_fault: False
+    cs_mag_heading_consistent: True
+    cs_aux_gpos: False
+    cs_rng_terrain: False
+    cs_opt_flow_terrain: False
+    cs_valid_fake_pos: False
+    cs_constant_pos: False
+    cs_baro_fault: False
+    cs_gnss_vel: True
+    cs_gnss_fault: False
+    cs_yaw_manual: False
+    cs_gnss_hgt_fault: False
+    cs_in_transition: False
+    cs_heading_observable: True
+    fs_bad_mag_x: False
+    fs_bad_mag_y: False
+    fs_bad_mag_z: False
+    fs_bad_hdg: False
+    fs_bad_mag_decl: False
+    fs_bad_airspeed: False
+    fs_bad_sideslip: False
+    fs_bad_optflow_x: False
+    fs_bad_optflow_y: False
+    fs_bad_acc_vertical: False
+    fs_bad_acc_clipping: False
+
 pxh> [2Kpxh> s[2Kpxh> sh[2Kpxh> shu[2Kpxh> shut[2Kpxh> shutd[2Kpxh> shutdo[2Kpxh> shutdow[2Kpxh> shutdown
 Exiting NOW.

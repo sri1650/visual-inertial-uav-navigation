@@ -2,8 +2,8 @@
 
 ## Verified pre-Codex baseline
 
-- Formal task graph: **33/39 complete**
-- Python tests: **50 passing**
+- Formal task graph: **34/39 complete**
+- Python tests: **53 passing**
 - C++ tests: **9/9 passing**
 - Pre-Codex gate: **PASS**
 - Physical UAV validation: **none**
@@ -56,7 +56,7 @@ The final 6-DoF SLAM/loop backend may be upgraded during integration, but the ar
 - estimator-loss failsafe policy fixture
 - SITL launch wrapper/spec
 
-PX4 SITL acceptance is complete. Actual MAVLink/MAVSDK external-vision transport remains incomplete.
+PX4 SITL acceptance and MAVLink external-vision transport are complete. The GPS-denied mission and failsafe acceptance remain incomplete.
 
 ### Embedded / runtime
 - ARM64 cross-build Docker/toolchain profile
@@ -108,12 +108,11 @@ These transitions validate the health policy around the future estimator; they a
 ## Deliberately reserved for Codex / Work
 
 Remaining formal tasks:
-M6-T02, M6-T03, M6-T04, M10-T01, M10-T02, M10-T03
+M6-T03, M6-T04, M10-T01, M10-T02, M10-T03
 
 ### Hard technical core
-1. **M6-T02** — real MAVLink/MAVSDK external vision transport accepted by PX4
-2. **M6-T03** — GPS-denied waypoint mission completes in SITL
-3. **M6-T04** — estimator-loss failsafe proven in SITL
+1. **M6-T03** — GPS-denied waypoint mission completes in SITL
+2. **M6-T04** — estimator-loss failsafe proven in SITL
 
 ### Final evidence only after integration
 8. M10-T01 — final clean-machine demo script
@@ -134,3 +133,4 @@ If it passes, do not refactor the completed pre-Codex modules unless a determini
 - M4-T03 complete: real EKF covariance trace, 6-DoF normalized innovation, feature/inlier statistics, calibrated camera timing residual and measured IMU gap now drive TRACKING/DEGRADED/LOST decisions. Deterministic nominal, weak-geometry, innovation-outlier, stale-camera and IMU-gap cases pass in 8 C++ tests.
 - M4-T04 complete: the existing bounded recovery supervisor now owns real EKF reset timing. The verified cycle is TRACKING -> DEGRADED -> LOST -> RESETTING -> INITIALISING -> TRACKING; reset clears pose, velocity, biases and covariance before a new origin and bias initialisation, while preserving the reset counter. Nine C++ tests pass.
 - M6-T01 complete: pinned PX4 commit `22b15b91fba5e79f01248d1c644ef942382af517` builds against its locked Gazebo Harmonic environment. The project wrapper launches Gazebo 8.10.0 headlessly, spawns x500, connects IMU/GPS/barometer/magnetometer streams, opens MAVLink ports and reaches a successful PX4 startup. Evidence is retained under `simulation/px4/evidence/`; 50 Python and 9 C++ tests pass.
+- M6-T02 complete: the MAVLink 2 adapter publishes quality-gated, timestamp-checked `ODOMETRY` in local NED with ENU/FLU pose conversion, covariance, reset counter and VIO estimator type. Live PX4 received the exact sample on `vehicle_visual_odometry`; with `EKF2_EV_CTRL=7`, EKF2 reported `cs_ev_pos`, `cs_ev_hgt` and `cs_ev_vel` true with zero fault-status changes. Evidence is in `simulation/px4/evidence/m6-t02-acceptance.md`; 53 Python and 9 C++ tests pass.

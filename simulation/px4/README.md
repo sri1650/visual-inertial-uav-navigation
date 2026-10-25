@@ -1,21 +1,26 @@
 # PX4 SITL integration fixture
 
-This directory intentionally prepares the **contract and acceptance assets** without claiming PX4 has been run in this environment.
+This directory contains the reproducible PX4/Gazebo integration and its retained acceptance evidence.
 
-Prepared:
+Verified:
+- headless Gazebo 8.10.0 x500 launch against pinned PX4 commit `22b15b91fba5e79f01248d1c644ef942382af517`
+- MAVLink 2 external-vision `ODOMETRY` received by PX4
+- EKF2 external position, height and velocity fusion active in SITL
+
+Prepared but not yet accepted:
 - GPS-denied waypoint mission
 - estimator-loss failsafe policy
-- ENU -> NED external-vision conversion code
-- watchdog thresholds
-- SITL launch wrapper
 
-Codex/Work must:
-1. install/use a compatible PX4-Autopilot checkout;
-2. launch SITL + Gazebo;
-3. implement MAVLink/MAVSDK external vision transport;
-4. verify the external vision feed is accepted;
-5. run the retained GPS-denied mission;
-6. induce estimator loss and prove the failsafe transition;
-7. capture logs and measured trajectory evidence.
+Launch SITL with:
 
-No simulation-complete claim is permitted before those checks pass.
+```bash
+PX4_DIR=/path/to/PX4-Autopilot simulation/px4/run_sitl.sh
+```
+
+In a second terminal, stream the deterministic acceptance pose with:
+
+```bash
+.venv/bin/python tools/send_external_vision.py --duration 20 --rate-hz 30
+```
+
+No physical-flight, hardware or safety-validation claim is made.
