@@ -7,10 +7,11 @@ namespace vionav {
 
 QualityAssessment assess_quality(const QualityObservation& x) {
   if (!std::isfinite(x.inlier_ratio) || !std::isfinite(x.covariance_trace) ||
-      !std::isfinite(x.camera_imu_residual_ms) || !std::isfinite(x.imu_gap_ms))
+      !std::isfinite(x.camera_imu_residual_ms) || !std::isfinite(x.imu_gap_ms) ||
+      !std::isfinite(x.visual_innovation_nis))
     return {TrackingState::LOST,0.0,{"non_finite_metric"}};
   if (x.inlier_ratio < 0.0 || x.inlier_ratio > 1.0 || x.covariance_trace < 0.0 ||
-      x.imu_gap_ms < 0.0)
+      x.imu_gap_ms < 0.0 || x.visual_innovation_nis < 0.0)
     throw std::invalid_argument("invalid quality observation");
 
   double score=100.0;
@@ -30,6 +31,11 @@ QualityAssessment assess_quality(const QualityObservation& x) {
 
   if (x.imu_gap_ms > 100) { reasons.push_back("imu_gap"); score-=70; }
   else if (x.imu_gap_ms > 20) { reasons.push_back("imu_gap_degraded"); score-=20; }
+
+  // Six-degree-of-freedom normalized innovation squared (NIS). The bounds
+  // are intentionally conservative around the chi-square tail for 6 DoF.
+  if (x.visual_innovation_nis > 25.0) { reasons.push_back("innovation_outlier"); score-=70; }
+  else if (x.visual_innovation_nis > 12.6) { reasons.push_back("innovation_high"); score-=20; }
 
   score=std::max(0.0,score);
   const auto has=[&](const char* s){

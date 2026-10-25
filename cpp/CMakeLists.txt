@@ -49,3 +49,7 @@ add_test(NAME keyframes_test COMMAND keyframes_test)
 add_executable(estimator_test tests/estimator_test.cpp)
 target_link_libraries(estimator_test PRIVATE vionav_core)
 add_test(NAME estimator_test COMMAND estimator_test)
+
+add_executable(estimator_quality_test tests/estimator_quality_test.cpp)
+target_link_libraries(estimator_quality_test PRIVATE vionav_core)
+add_test(NAME estimator_quality_test COMMAND estimator_quality_test)

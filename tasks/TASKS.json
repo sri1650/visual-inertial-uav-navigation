@@ -197,7 +197,7 @@
     {
       "id": "M4-T03",
       "title": "Implement covariance/quality output",
-      "status": "todo",
+      "status": "done",
       "dependencies": [
         "M4-T02"
       ],

@@ -65,4 +65,5 @@ int main() {
     rejected_gap = true;
   }
   assert(rejected_gap);
+  assert(estimator.state().tracking == TrackingState::LOST);
 }

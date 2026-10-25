@@ -2,6 +2,7 @@
 
 #include "vionav/calibration.hpp"
 #include "vionav/estimator_state.hpp"
+#include "vionav/quality.hpp"
 
 #include <array>
 #include <cstdint>
@@ -36,6 +37,9 @@ struct EstimatorDiagnostics {
   double covariance_trace{};
   double position_innovation_norm_m{};
   double orientation_innovation_norm_rad{};
+  double visual_innovation_nis{};
+  double camera_imu_residual_ms{};
+  double last_imu_gap_ms{};
   std::size_t tracked_features{};
   double inlier_ratio{1.0};
   std::int64_t last_camera_timestamp_ns{};
@@ -63,6 +67,7 @@ class VisualInertialEkf {
   bool initialised() const;
   const EstimatorState& state() const;
   const EstimatorDiagnostics& diagnostics() const;
+  QualityAssessment quality_assessment() const;
   std::array<double, 15> covariance_diagonal() const;
 
  private:

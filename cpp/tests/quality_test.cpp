@@ -16,4 +16,8 @@ int main() {
   assert(supervisor.reset_count()==1);
   assert(supervisor.observe(good)==RecoveryAction::RECOVERING);
   assert(supervisor.observe(good)==RecoveryAction::RECOVERED);
+
+  auto innovation_lost=assess_quality({120,.9,1.0,1.0,2.0,30.0});
+  assert(innovation_lost.state==TrackingState::LOST);
+  assert(innovation_lost.reasons.back()=="innovation_outlier");
 }

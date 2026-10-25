@@ -13,6 +13,7 @@ struct QualityObservation {
   double covariance_trace{};
   double camera_imu_residual_ms{};
   double imu_gap_ms{};
+  double visual_innovation_nis{};
 };
 
 struct QualityAssessment {

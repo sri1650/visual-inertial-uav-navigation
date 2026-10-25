@@ -95,6 +95,15 @@ struct VisualInertialEkf::Impl {
     state.quality.last_camera_timestamp_ns = diagnostics.last_camera_timestamp_ns;
     state.quality.last_imu_timestamp_ns = diagnostics.last_imu_timestamp_ns;
   }
+
+  QualityAssessment assess() const {
+    return assess_quality({diagnostics.tracked_features,
+                           diagnostics.inlier_ratio,
+                           diagnostics.covariance_trace,
+                           diagnostics.camera_imu_residual_ms,
+                           diagnostics.last_imu_gap_ms,
+                           diagnostics.visual_innovation_nis});
+  }
 };
 
 VisualInertialEkf::VisualInertialEkf(SensorCalibration calibration, EstimatorConfig config)
@@ -155,8 +164,11 @@ void VisualInertialEkf::predict(const ImuSample& sample) {
   if (sample.timestamp_ns <= impl_->last_imu_timestamp_ns)
     throw std::invalid_argument("IMU timestamps must increase");
   const double dt = static_cast<double>(sample.timestamp_ns - impl_->last_imu_timestamp_ns) * 1e-9;
-  if (!(dt > 0.0) || dt > impl_->config.max_imu_dt_s)
+  impl_->diagnostics.last_imu_gap_ms = dt * 1e3;
+  if (!(dt > 0.0) || dt > impl_->config.max_imu_dt_s) {
+    impl_->state.tracking = TrackingState::LOST;
     throw std::invalid_argument("IMU gap exceeds configured limit");
+  }
 
   const Eigen::Vector3d gyro = impl_->rotation_body_imu * eigen(sample.angular_velocity_rad_s) -
                                eigen(impl_->state.bias.gyro_rad_s);
@@ -243,6 +255,7 @@ void VisualInertialEkf::update_visual(const VisualPoseMeasurement& measurement) 
       impl_->covariance * observation.transpose() *
       decomposition.solve(Eigen::Matrix<double, 6, 6>::Identity());
   const Vector15 correction = gain * innovation;
+  const double innovation_nis = innovation.dot(decomposition.solve(innovation));
 
   impl_->state.position_m = domain(eigen(impl_->state.position_m) + correction.segment<3>(0));
   impl_->state.velocity_m_s = domain(eigen(impl_->state.velocity_m_s) + correction.segment<3>(3));
@@ -265,10 +278,14 @@ void VisualInertialEkf::update_visual(const VisualPoseMeasurement& measurement) 
   impl_->covariance = 0.5 * (impl_->covariance + impl_->covariance.transpose());
   impl_->diagnostics.position_innovation_norm_m = innovation.head<3>().norm();
   impl_->diagnostics.orientation_innovation_norm_rad = innovation.tail<3>().norm();
+  impl_->diagnostics.visual_innovation_nis = innovation_nis;
   impl_->diagnostics.tracked_features = measurement.tracked_features;
   impl_->diagnostics.inlier_ratio = measurement.inlier_ratio;
   impl_->diagnostics.last_camera_timestamp_ns = corrected_timestamp;
+  impl_->diagnostics.camera_imu_residual_ms =
+      static_cast<double>(impl_->last_imu_timestamp_ns - corrected_timestamp) * 1e-6;
   impl_->update_quality();
+  impl_->state.tracking = impl_->assess().state;
 }
 
 void VisualInertialEkf::reset() {
@@ -286,6 +303,7 @@ void VisualInertialEkf::reset() {
 bool VisualInertialEkf::initialised() const { return impl_->is_initialised; }
 const EstimatorState& VisualInertialEkf::state() const { return impl_->state; }
 const EstimatorDiagnostics& VisualInertialEkf::diagnostics() const { return impl_->diagnostics; }
+QualityAssessment VisualInertialEkf::quality_assessment() const { return impl_->assess(); }
 
 std::array<double, 15> VisualInertialEkf::covariance_diagonal() const {
   std::array<double, 15> result{};
