@@ -23,7 +23,8 @@ def main():
     wall=time.perf_counter()-wall0
     cpu=time.process_time()-cpu0
     rss_after=proc.memory_info().rss
-    max_rss_kb=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    max_rss_native=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+    max_rss_bytes=max_rss_native if sys.platform=="darwin" else max_rss_native*1024
     result={
       "frames":args.frames,
       "wall_s":wall,
@@ -32,7 +33,7 @@ def main():
       "mean_features":features/args.frames,
       "rss_before_mb":rss_before/(1024*1024),
       "rss_after_mb":rss_after/(1024*1024),
-      "max_rss_mb":max_rss_kb/1024,
+      "max_rss_mb":max_rss_bytes/(1024*1024),
     }
     text=json.dumps(result,indent=2,sort_keys=True)
     if args.json_out:

@@ -35,11 +35,7 @@ def main():
       "status":"pass" if all(x["returncode"]==0 for x in checks) else "fail",
       "checks":checks,
       "reserved_for_codex":[
-        "real nonlinear visual-inertial estimator backend",
-        "backend covariance integration and reset/recovery integration",
         "production loop closure / 6-DoF pose graph backend",
-        "PX4 SITL + MAVLink/MAVSDK external vision integration",
-        "GPS-denied mission and estimator-loss failsafe validation",
         "ARM hardware performance optimisation",
         "real EuRoC estimator runs and final performance claims",
       ]
