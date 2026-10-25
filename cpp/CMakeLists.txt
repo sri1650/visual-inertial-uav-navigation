@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.20)
 project(vionav_core LANGUAGES CXX)
 
+find_package(Eigen3 REQUIRED NO_MODULE)
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -12,8 +14,10 @@ add_library(vionav_core
   src/quality.cpp
   src/keyframes.cpp
   src/estimator_state.cpp
+  src/estimator.cpp
 )
 target_include_directories(vionav_core PUBLIC include)
+target_link_libraries(vionav_core PUBLIC Eigen3::Eigen)
 target_compile_options(vionav_core PRIVATE -Wall -Wextra -Wpedantic)
 
 enable_testing()
@@ -41,3 +45,7 @@ add_test(NAME quality_test COMMAND quality_test)
 add_executable(keyframes_test tests/keyframes_test.cpp)
 target_link_libraries(keyframes_test PRIVATE vionav_core)
 add_test(NAME keyframes_test COMMAND keyframes_test)
+
+add_executable(estimator_test tests/estimator_test.cpp)
+target_link_libraries(estimator_test PRIVATE vionav_core)
+add_test(NAME estimator_test COMMAND estimator_test)

@@ -2,9 +2,9 @@
 
 ## Verified pre-Codex baseline
 
-- Formal task graph: **29/39 complete**
+- Formal task graph: **30/39 complete**
 - Python tests: **50 passing**
-- C++ tests: **6/6 passing**
+- C++ tests: **7/7 passing**
 - Pre-Codex gate: **PASS**
 - Physical UAV validation: **none**
 - PX4 SITL validation: **not yet completed**
@@ -39,7 +39,7 @@
 - bounded reset/recovery supervisor
 - timing/frame/IMU-gap fault campaign
 
-This is **not** the nonlinear VIO backend. M4-T02 remains deliberately incomplete.
+The M4-T02 nonlinear error-state EKF now uses these foundations; quality and recovery integration remain M4-T03/M4-T04.
 
 ### SLAM boundary
 - Python + C++ keyframe database
@@ -108,16 +108,15 @@ These transitions validate the health policy around the future estimator; they a
 ## Deliberately reserved for Codex / Work
 
 Remaining formal tasks:
-M4-T02, M4-T03, M4-T04, M6-T01, M6-T02, M6-T03, M6-T04, M10-T01, M10-T02, M10-T03
+M4-T03, M4-T04, M6-T01, M6-T02, M6-T03, M6-T04, M10-T01, M10-T02, M10-T03
 
 ### Hard technical core
-1. **M4-T02** — real visual-inertial estimator backend
-2. **M4-T03** — integrate real estimator covariance/quality into the prepared health boundary
-3. **M4-T04** — integrate reset/recovery with actual estimator state
-4. **M6-T01** — install/launch PX4 SITL + Gazebo and verify environment
-5. **M6-T02** — real MAVLink/MAVSDK external vision transport accepted by PX4
-6. **M6-T03** — GPS-denied waypoint mission completes in SITL
-7. **M6-T04** — estimator-loss failsafe proven in SITL
+1. **M4-T03** — integrate real estimator covariance/quality into the prepared health boundary
+2. **M4-T04** — integrate reset/recovery with actual estimator state
+3. **M6-T01** — install/launch PX4 SITL + Gazebo and verify environment
+4. **M6-T02** — real MAVLink/MAVSDK external vision transport accepted by PX4
+5. **M6-T03** — GPS-denied waypoint mission completes in SITL
+6. **M6-T04** — estimator-loss failsafe proven in SITL
 
 ### Final evidence only after integration
 8. M10-T01 — final clean-machine demo script
@@ -131,3 +130,7 @@ python tools/pre_codex_gate.py
 ```
 
 If it passes, do not refactor the completed pre-Codex modules unless a deterministic integration failure requires it.
+
+## Codex milestones
+
+- M4-T02 complete: a middleware-independent 15-state multiplicative error-state EKF fuses calibrated IMU propagation with visual body-pose updates, estimates velocity/gyro bias/accelerometer bias, propagates covariance, rejects invalid timing/numerics, and converges on a deterministic accelerated trajectory. Eigen is the only new C++ dependency; 50 Python and 7 C++ tests pass.

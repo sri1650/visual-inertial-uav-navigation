@@ -185,7 +185,7 @@
     {
       "id": "M4-T02",
       "title": "Implement visual-inertial estimator backend",
-      "status": "todo",
+      "status": "done",
       "dependencies": [
         "M4-T01"
       ],
