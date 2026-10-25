@@ -209,7 +209,7 @@
     {
       "id": "M4-T04",
       "title": "Implement reset/recovery logic",
-      "status": "todo",
+      "status": "done",
       "dependencies": [
         "M4-T03"
       ],

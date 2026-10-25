@@ -2,9 +2,9 @@
 
 ## Verified pre-Codex baseline
 
-- Formal task graph: **31/39 complete**
+- Formal task graph: **32/39 complete**
 - Python tests: **50 passing**
-- C++ tests: **8/8 passing**
+- C++ tests: **9/9 passing**
 - Pre-Codex gate: **PASS**
 - Physical UAV validation: **none**
 - PX4 SITL validation: **not yet completed**
@@ -108,14 +108,13 @@ These transitions validate the health policy around the future estimator; they a
 ## Deliberately reserved for Codex / Work
 
 Remaining formal tasks:
-M4-T04, M6-T01, M6-T02, M6-T03, M6-T04, M10-T01, M10-T02, M10-T03
+M6-T01, M6-T02, M6-T03, M6-T04, M10-T01, M10-T02, M10-T03
 
 ### Hard technical core
-1. **M4-T04** — integrate reset/recovery with actual estimator state
-2. **M6-T01** — install/launch PX4 SITL + Gazebo and verify environment
-3. **M6-T02** — real MAVLink/MAVSDK external vision transport accepted by PX4
-4. **M6-T03** — GPS-denied waypoint mission completes in SITL
-5. **M6-T04** — estimator-loss failsafe proven in SITL
+1. **M6-T01** — install/launch PX4 SITL + Gazebo and verify environment
+2. **M6-T02** — real MAVLink/MAVSDK external vision transport accepted by PX4
+3. **M6-T03** — GPS-denied waypoint mission completes in SITL
+4. **M6-T04** — estimator-loss failsafe proven in SITL
 
 ### Final evidence only after integration
 8. M10-T01 — final clean-machine demo script
@@ -134,3 +133,4 @@ If it passes, do not refactor the completed pre-Codex modules unless a determini
 
 - M4-T02 complete: a middleware-independent 15-state multiplicative error-state EKF fuses calibrated IMU propagation with visual body-pose updates, estimates velocity/gyro bias/accelerometer bias, propagates covariance, rejects invalid timing/numerics, and converges on a deterministic accelerated trajectory. Eigen is the only new C++ dependency; 50 Python and 7 C++ tests pass.
 - M4-T03 complete: real EKF covariance trace, 6-DoF normalized innovation, feature/inlier statistics, calibrated camera timing residual and measured IMU gap now drive TRACKING/DEGRADED/LOST decisions. Deterministic nominal, weak-geometry, innovation-outlier, stale-camera and IMU-gap cases pass in 8 C++ tests.
+- M4-T04 complete: the existing bounded recovery supervisor now owns real EKF reset timing. The verified cycle is TRACKING -> DEGRADED -> LOST -> RESETTING -> INITIALISING -> TRACKING; reset clears pose, velocity, biases and covariance before a new origin and bias initialisation, while preserving the reset counter. Nine C++ tests pass.

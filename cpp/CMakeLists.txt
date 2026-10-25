@@ -53,3 +53,7 @@ add_test(NAME estimator_test COMMAND estimator_test)
 add_executable(estimator_quality_test tests/estimator_quality_test.cpp)
 target_link_libraries(estimator_quality_test PRIVATE vionav_core)
 add_test(NAME estimator_quality_test COMMAND estimator_quality_test)
+
+add_executable(estimator_recovery_test tests/estimator_recovery_test.cpp)
+target_link_libraries(estimator_recovery_test PRIVATE vionav_core)
+add_test(NAME estimator_recovery_test COMMAND estimator_recovery_test)

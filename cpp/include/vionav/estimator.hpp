@@ -31,6 +31,8 @@ struct EstimatorConfig {
   double accel_bias_random_walk{0.004};
   double max_imu_dt_s{0.05};
   std::size_t minimum_initialisation_samples{20};
+  std::size_t lost_frames_before_reset{3};
+  std::size_t good_frames_to_recover{5};
 };
 
 struct EstimatorDiagnostics {
@@ -63,6 +65,8 @@ class VisualInertialEkf {
   void predict(const ImuSample& sample);
   void update_visual(const VisualPoseMeasurement& measurement);
   void reset();
+  void begin_reinitialisation();
+  RecoveryAction supervise_quality();
 
   bool initialised() const;
   const EstimatorState& state() const;

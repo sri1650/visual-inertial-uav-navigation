@@ -67,13 +67,17 @@ struct VisualInertialEkf::Impl {
   Eigen::Matrix3d rotation_body_imu{Eigen::Matrix3d::Identity()};
   std::int64_t last_imu_timestamp_ns{};
   bool is_initialised{};
+  RecoverySupervisor recovery;
 
   explicit Impl(SensorCalibration calibration_value, EstimatorConfig config_value)
-      : calibration(std::move(calibration_value)), config(config_value) {
+      : calibration(std::move(calibration_value)),
+        config(config_value),
+        recovery(config_value.lost_frames_before_reset, config_value.good_frames_to_recover) {
     calibration.validate();
     if (!(config.gyro_noise_rad_s > 0.0 && config.accel_noise_m_s2 > 0.0 &&
           config.gyro_bias_random_walk > 0.0 && config.accel_bias_random_walk > 0.0 &&
-          config.max_imu_dt_s > 0.0 && config.minimum_initialisation_samples >= 2))
+          config.max_imu_dt_s > 0.0 && config.minimum_initialisation_samples >= 2 &&
+          config.lost_frames_before_reset > 0 && config.good_frames_to_recover > 0))
       throw std::invalid_argument("invalid estimator configuration");
     rotation_body_imu = calibration_rotation(calibration.T_body_imu);
     reset_covariance();
@@ -142,7 +146,9 @@ void VisualInertialEkf::initialise(const VisualPoseMeasurement& pose,
   if (std::abs(mean_accel.norm() - expected_specific_force.norm()) > 2.0)
     throw std::invalid_argument("stationary acceleration is inconsistent with gravity");
 
+  const std::uint64_t reset_count = impl_->state.reset_count;
   impl_->state = {};
+  impl_->state.reset_count = reset_count;
   impl_->state.tracking = TrackingState::TRACKING;
   impl_->state.position_m = pose.position_world_m;
   impl_->state.orientation = domain(orientation);
@@ -298,6 +304,19 @@ void VisualInertialEkf::reset() {
   impl_->is_initialised = false;
   impl_->reset_covariance();
   impl_->update_quality();
+}
+
+void VisualInertialEkf::begin_reinitialisation() {
+  if (impl_->state.tracking != TrackingState::RESETTING || impl_->is_initialised)
+    throw std::logic_error("estimator is not waiting for reinitialisation");
+  impl_->state.tracking = TrackingState::INITIALISING;
+}
+
+RecoveryAction VisualInertialEkf::supervise_quality() {
+  const QualityAssessment assessment = impl_->assess();
+  const RecoveryAction action = impl_->recovery.observe(assessment);
+  if (action == RecoveryAction::RESET) reset();
+  return action;
 }
 
 bool VisualInertialEkf::initialised() const { return impl_->is_initialised; }
