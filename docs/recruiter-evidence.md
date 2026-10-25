@@ -1,70 +1,42 @@
-# Recruiter / Interview Evidence Map
+# Recruiter evidence map
 
-This file distinguishes implemented evidence from planned capability.
+## Strongest demonstrated evidence
 
-## Implemented and tested now
+### Estimation and C++
 
-### Camera/IMU timing and calibration
-Evidence:
-- deterministic nearest timestamp association in Python and C++
-- synthetic time-offset recovery
-- calibration parsing/validation
-- orthonormal/right-handed transform checks
-- calibration-quality report
+- Fifteen-state multiplicative error-state EKF: pose, velocity, gyro bias and accelerometer bias.
+- IMU propagation, calibrated visual body-pose updates, covariance propagation and innovation diagnostics.
+- Deterministic accelerated-trajectory convergence tests.
+- Real estimator health and bounded reset cycle: TRACKING → DEGRADED → LOST → RESETTING → INITIALISING → TRACKING.
 
-Interview angle: explain why a 10–20 ms camera/IMU timing error can masquerade as geometric or estimator error.
+### Vision and timing
 
-### IMU pipeline foundation
-Evidence:
-- strictly ordered IMU buffer
-- interpolation
-- gyro/accelerometer bias state
-- midpoint-style preintegration foundation
-- stationary gravity initialisation
+- Camera/IMU calibration and rigid-transform validation.
+- Timestamp association and deterministic offset recovery.
+- Feature detection, pyramidal optical flow, forward/backward validation and essential-matrix RANSAC.
+- Retained camera-delay, frame-loss, IMU-gap and weak-geometry fault campaign.
 
-Interview angle: explain why biases are part of the estimator state and why raw IMU cannot simply be integrated indefinitely.
+### UAV integration
 
-### Geometric computer vision frontend
-Evidence:
-- deterministic grayscale/contrast preprocessing
-- feature detection
-- pyramidal Lucas–Kanade tracking
-- forward/backward consistency gating
-- essential-matrix RANSAC outlier rejection
-- keyframe selection from feature count, parallax and maximum interval
+- Headless PX4/Gazebo x500 at pinned PX4 commit `22b15b91fba5e79f01248d1c644ef942382af517`.
+- MAVLink 2 ODOMETRY with coordinate, quaternion, covariance, timestamp, quality and reset handling.
+- Five-waypoint GPS-denied simulation completed; maximum settled error 0.883 m; landed and disarmed.
+- Injected external-estimator loss activated Descend/blind-land failsafe in 0.658 s; landed and disarmed.
 
-Interview angle: explain feature loss, RANSAC, epipolar geometry and why low parallax is a poor keyframe trigger.
+### Reproducibility
 
-### Estimator health state
-Evidence:
-- INITIALISING / TRACKING / DEGRADED / LOST / RESETTING state machine
-- thresholds for sensor timeout, feature collapse and uncertainty growth
+- 57 Python and 9 C++ tests.
+- Clean-machine setup and one-command offline demo.
+- Machine-readable benchmark and SITL evidence.
+- Explicit separation between measured evidence and unvalidated claims.
 
-Interview angle: the estimator must not silently report healthy tracking after observability collapses.
+## Truthful CV bullets
 
-### Evaluation
-Evidence:
-- EuRoC camera/IMU/ground-truth loaders
-- SE(3) trajectory alignment
-- ATE/RPE computation
-- timestamp-offset sensitivity tooling
-- drop/shift fault injection
-- machine-readable experiment matrix
+- Built a middleware-independent modern C++ visual-inertial estimation core with a 15-state error-state EKF, IMU propagation, bias estimation, covariance/innovation diagnostics, and bounded reset recovery.
+- Implemented calibrated geometric-vision and timing tooling using pyramidal optical flow, forward/backward validation, essential-matrix RANSAC, camera/IMU association, and deterministic sensor-fault campaigns.
+- Integrated a quality-gated MAVLink external-vision adapter with PX4/Gazebo and verified a five-waypoint GPS-denied SITL mission plus a 0.658 s estimator-loss-to-Descend failsafe transition.
+- Created reproducible Python/C++ verification and benchmark workflows covering 66 automated tests, frontend latency, process resources, trajectory metrics and retained SITL evidence.
 
-## Planned / not yet completed
-- nonlinear/factor-graph or filtering VIO backend
-- measured EuRoC estimator accuracy
-- loop closure and pose-graph correction
-- PX4 SITL execution
-- live embedded camera pipeline
-- geo-localisation
-- physical camera/IMU test-rig validation
-- physical UAV flight
+## Claims not supported
 
-Do not describe planned items as completed in a CV or interview.
-
-## CV bullets available now
-- Developed a C++/Python visual-inertial navigation foundation with typed camera/IMU interfaces, calibration validation, timestamp synchronisation and deterministic sensor-fusion test tooling.
-- Implemented a geometric computer-vision frontend using feature detection, pyramidal optical flow, forward/backward track validation, essential-matrix RANSAC and keyframe-selection policies.
-- Built IMU buffering, interpolation, bias-state and preintegration foundations in modern C++, with deterministic unit tests for synthetic motion and gravity initialisation.
-- Created EuRoC-compatible evaluation tooling covering trajectory alignment, ATE/RPE metrics, timestamp-offset experiments and reproducible sensor-fault injection.
+Do not claim EuRoC estimator accuracy, physical flight, flight-worthiness, real-time ARM performance, production deployment or safety certification. The PX4 waypoint errors describe simulator control around a ground-truth-derived external-vision feed, not visual-inertial odometry accuracy.

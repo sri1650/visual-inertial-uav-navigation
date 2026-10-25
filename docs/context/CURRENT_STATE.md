@@ -1,15 +1,15 @@
 # Current State
 
-## Verified pre-Codex baseline
+## Verified final state
 
-- Formal task graph: **38/39 complete**
+- Formal task graph: **39/39 complete**
 - Python tests: **57 passing**
 - C++ tests: **9/9 passing**
-- Pre-Codex gate: **PASS**
+- Full deterministic gate: **PASS**
 - Physical UAV validation: **none**
 - PX4 SITL validation: **Gazebo 8.10.0 x500 launch verified on macOS**
 
-## Completed before Codex
+## Implemented system
 
 ### Timing / calibration
 - camera/IMU typed contracts
@@ -79,18 +79,18 @@ PX4 SITL acceptance, MAVLink external-vision transport, the GPS-denied waypoint 
 - retained tracking-quality fault campaign
 - video latency + process resource benchmark
 
-## Measured local pre-backend evidence
+## Measured local evidence
 
 From 100 synthetic 640x480 frames on this runtime:
-- mean preprocessing/feature latency: ~4.25 ms/frame
-- p50: ~3.91 ms
-- p95: ~5.74 ms
-- max: ~22.03 ms
-- mean detected features: ~158
+- mean preprocessing/feature latency: **1.387 ms/frame**
+- p50: **1.370 ms**
+- p95: **1.445 ms**
+- max: **2.651 ms**
+- mean detected features: **154.76**
 
 Process profile over 100 frames:
-- mean wall time: ~3.69 ms/frame
-- max RSS observed: ~153 MB
+- mean wall time: **2.186 ms/frame**
+- max RSS observed: **78.34 MiB**
 
 These numbers are **frontend/local-runtime evidence only**, not full VIO, ARM hardware, PX4 or production performance.
 
@@ -103,25 +103,21 @@ Retained quality-state campaign:
 - 50 ms IMU gap -> DEGRADED
 - 150 ms IMU gap -> LOST
 
-These transitions validate the health policy around the future estimator; they are not trajectory-accuracy results.
+These transitions validate estimator health policy; they are not trajectory-accuracy results.
 
-## Deliberately reserved for Codex / Work
+## Remaining validation limits
 
-Remaining formal tasks:
-M10-T03
+Remaining formal tasks: none.
 
-### Final evidence only after integration
-8. M10-T01 — final clean-machine demo script
-9. M10-T02 — final integrated benchmark report/architecture diagrams
-10. M10-T03 — final recruiter README/interview pack with integrated evidence
+- no end-to-end EuRoC camera/IMU estimator run or ATE/RPE result
+- no physical camera/IMU rig or UAV flight validation
+- no ARM flight-computer profiling, production deployment or safety certification
 
-## First Work command
+## Reproduction command
 
 ```bash
-python tools/pre_codex_gate.py
+./tools/run_demo.sh offline
 ```
-
-If it passes, do not refactor the completed pre-Codex modules unless a deterministic integration failure requires it.
 
 ## Codex milestones
 
@@ -134,3 +130,4 @@ If it passes, do not refactor the completed pre-Codex modules unless a determini
 - M6-T04 complete: after 399 live vision updates and a stable Offboard hover, the verifier stopped only the external-vision stream while retaining GCS heartbeats and setpoints. PX4 invalidated local position, activated its Descend/blind-land failsafe in 0.658 s, detected landing and disarmed. Evidence is in `simulation/px4/evidence/m6-t04-failsafe.json`; 57 Python and 9 C++ tests pass.
 - M10-T01 complete: `tools/run_demo.sh` provides deterministic offline, evidence-only, GPS-denied mission and estimator-loss modes. `docs/demo.md` contains clean macOS and pinned PX4/Gazebo setup commands. The offline demo passed all 57 Python tests, all 9 C++ tests, compilation, frontend/resource benchmarks, the fault campaign and retained SITL evidence validation.
 - M10-T02 complete: `docs/benchmark.md` publishes measured local frontend/resource, fault-campaign and PX4/Gazebo results; `docs/architecture.md` documents the implemented data path and estimator-loss sequence. The README links both. EuRoC ATE/RPE remains explicitly unmeasured because no end-to-end EuRoC VIO runner exists.
+- M10-T03 complete: the recruiter README, evidence map and interview pack now describe only verified implementation and measured results, link directly to retained evidence, and explicitly separate simulator control results from unmeasured EuRoC/physical-flight accuracy.

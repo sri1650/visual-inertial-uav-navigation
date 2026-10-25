@@ -1,49 +1,54 @@
-# Interview Pack — Visual-Inertial UAV Navigation
+# Interview pack
 
-## 90-second project explanation
-I built this project to demonstrate the software and estimation problems behind GPS-denied UAV autonomy. The architecture deliberately separates a middleware-independent C++ estimation core from PX4/ROS adapters. Camera and IMU timing, calibration and coordinate frames are first-class interfaces. The validation plan starts with deterministic synthetic tests, then public EuRoC MAV datasets, then PX4 SITL/Gazebo, and only later physical hardware. The important engineering evidence is measured trajectory error, timing sensitivity, tracking-loss behaviour, recovery, latency and resource use.
+## 90-second explanation
 
-## Questions to be ready for
+I built a GPS-denied UAV navigation stack around three boundaries. First, a middleware-independent modern C++ core handles calibrated IMU propagation, visual pose updates, covariance and health-aware recovery. Second, Python supplies geometric-vision, dataset, benchmark and simulation orchestration. Third, a quality-gated MAVLink adapter converts ENU/FLU estimates to PX4's NED/FRD convention. I verified the core with deterministic tests and fault campaigns, then used headless PX4/Gazebo to complete a five-waypoint mission with GNSS fusion disabled. Stopping external vision caused PX4 to enter Descend/blind-land failsafe in 0.658 seconds and disarm after landing. The important limitation is that the SITL vision source is independent Gazebo truth, so I do not claim EuRoC or physical-flight VIO accuracy.
 
-### C++ / systems
-1. Why keep the estimator core independent from ROS/PX4?
-2. Which parts belong in C++ versus Python?
-3. How would you avoid allocations in a real-time-ish estimation loop?
-4. How would you structure ownership of image/IMU buffers?
-5. How would you profile a dropped-frame latency spike?
+## Design decisions to explain
 
-### State estimation
-6. What is the estimator state in a VIO system?
-7. Why are accelerometer and gyro biases estimated?
-8. What makes visual scale observable or unobservable?
-9. What is IMU preintegration and why is it useful?
-10. What failure modes cause VIO divergence?
+1. **Middleware-independent core:** numerical code is testable without ROS, PX4 or a simulator.
+2. **Explicit frames:** ENU/FLU and NED/FRD conversions are typed and unit-tested because a silent frame error can destabilise flight control.
+3. **Error-state EKF:** the nominal pose evolves on the manifold while a small 15-state error and covariance are propagated and corrected.
+4. **Quality before transport:** stale, low-quality or future-dated estimates are suppressed rather than forwarded as healthy navigation data.
+5. **Bounded recovery:** LOST triggers a real state/covariance reset and reinitialisation, with a retained reset counter.
+6. **Independent acceptance truth:** Gazebo truth drives the simulated external-vision boundary; PX4's own estimate is never fed back as its measurement.
 
-### Geometry / vision
-11. Difference between essential matrix and homography?
-12. How do you reject feature outliers?
-13. What happens in low-texture scenes?
-14. How does motion blur affect tracking?
-15. Why are camera intrinsics and distortion important?
+## Likely technical questions
 
-### Time synchronisation
-16. What happens if camera and IMU timestamps are offset by 10–20 ms?
-17. How can an offset be estimated?
-18. Why can time offset look like spatial calibration error?
+### Estimation
 
-### UAV integration
-19. How would you feed external pose/velocity into PX4?
-20. What should happen when VIO transitions from TRACKING to LOST?
-21. How would you test failsafe behaviour without flight hardware?
+- Why estimate gyro and accelerometer biases?
+- What is the difference between nominal and error state?
+- How are covariance and innovation used to reject unsafe updates?
+- What becomes unobservable during low parallax or estimator-aiding loss?
+- Why is a ground-truth-fed SITL mission not a VIO accuracy benchmark?
 
-### Validation
-22. ATE vs RPE?
-23. Why EuRoC?
-24. What evidence would make you trust a VIO improvement?
-25. What still remains unproven after SITL?
+### Vision and timing
 
-## CV-ready truthful bullets after completion
-- Developed a middleware-independent C++ visual-inertial navigation stack with explicit camera/IMU calibration, timestamp synchronisation and state-quality interfaces.
-- Built reproducible EuRoC MAV evaluation tooling reporting ATE/RPE, tracking loss, timing sensitivity and estimator latency.
-- Integrated the estimator with PX4 SITL/Gazebo for GPS-denied navigation and estimator-loss failsafe testing.
-- Implemented deterministic fault-injection scenarios covering camera delay, frame loss, IMU gaps and degraded visual conditions.
+- Why use forward/backward optical-flow validation and RANSAC together?
+- How can a 10–20 ms camera/IMU offset resemble calibration or motion error?
+- What causes essential-matrix estimation to fail?
+- How should blur, feature collapse and IMU gaps affect estimator health?
+
+### PX4 and safety boundary
+
+- How are ENU/FLU position and attitude converted to NED/FRD?
+- Which covariance and reset metadata are sent in MAVLink ODOMETRY?
+- Why disable GNSS fusion rather than merely hide a UI indicator?
+- What evidence proves the failsafe was estimator-loss driven?
+- What additional steps are required before physical flight?
+
+## Measured numbers to remember
+
+- 57 Python tests, 9 C++ tests.
+- 5/5 GPS-denied waypoints; 0.883 m maximum settled error; 32.474 s mission.
+- 0.658 s estimator-loss-to-Descend transition; blind land and disarm.
+- Synthetic frontend: 1.387 ms mean, 1.445 ms p95 over 100 640×480 frames.
+- Process maximum RSS: 78.34 MiB on the measured arm64 Mac run.
+
+## Honest next steps
+
+- Wire the camera frontend and C++ estimator into a timestamped EuRoC runner and report ATE/RPE.
+- Replace the translation-only pose-graph prototype with a production 6-DoF backend.
+- Profile and tune on an actual ARM flight computer.
+- Validate camera/IMU calibration and timing on a physical rig before any restrained hardware flight-test programme.

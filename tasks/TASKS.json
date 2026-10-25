@@ -464,7 +464,7 @@
     {
       "id": "M10-T03",
       "title": "Final recruiter README and interview pack",
-      "status": "todo",
+      "status": "done",
       "dependencies": [
         "M10-T02"
       ],
