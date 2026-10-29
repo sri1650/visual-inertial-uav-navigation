@@ -17,8 +17,9 @@ jobs:
       - name: Download official ETH EuRoC MH_01_easy sensor sequence
         run: |
           mkdir -p "$RUNNER_TEMP/euroc" acceptance-data
-          curl --fail --location --retry 2 --connect-timeout 20 --max-time 900 \
-            'https://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/machine_hall/MH_01_easy/MH_01_easy.zip' \
+          printf '%s\n' 'Public ETH ASL research dataset; original published HTTP URL. No credentials are sent. Download is not estimator acceptance.' > acceptance-data/DOWNLOAD_SCOPE.txt
+          curl --fail --location --retry 1 --connect-timeout 20 --max-time 900 \
+            'http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/machine_hall/MH_01_easy/MH_01_easy.zip' \
             -o "$RUNNER_TEMP/euroc/MH_01_easy.zip"
           sha256sum "$RUNNER_TEMP/euroc/MH_01_easy.zip" > acceptance-data/dataset-sha256.txt
       - name: Validate dataset layout and retain bounded sensor review subset
