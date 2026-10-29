@@ -6,7 +6,7 @@ A modern C++/Python robotics portfolio project for GPS-denied UAV navigation: ca
 
 | Area | Retained result |
 |---|---:|
-| Python tests | 61 passed |
+| Python tests | 62 passed |
 | C++ tests | 9 passed |
 | GPS-denied PX4 mission | 5/5 waypoints |
 | Maximum settled waypoint error | 0.883 m |

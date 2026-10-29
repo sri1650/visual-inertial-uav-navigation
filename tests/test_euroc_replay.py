@@ -74,6 +74,17 @@ def test_rejects_camera_path_traversal(tmp_path: Path):
                              archive_checksum="known-md5", thresholds=thresholds())
 
 
+def test_rejects_missing_file_from_unmatched_camera_row(tmp_path: Path):
+    root = fixture(tmp_path / "MH_01_easy")
+    cam1 = root / "mav0" / "cam1" / "data.csv"
+    # This row cannot pair under the zero-delta threshold. It must still be
+    # validated because it is part of the declared sensor acquisition stream.
+    cam1.write_text(cam1.read_text() + "40000000,missing-unmatched.png\n")
+    with pytest.raises(FileNotFoundError, match="missing-unmatched.png"):
+        audit_euroc_sequence(root, sequence="MH_01_easy",
+                             archive_checksum="known-md5", thresholds=thresholds())
+
+
 def test_cli_retains_provenance_and_failure_exit(tmp_path: Path):
     root = fixture(tmp_path / "MH_01_easy", missing_right=True)
     output = tmp_path / "audit.json"

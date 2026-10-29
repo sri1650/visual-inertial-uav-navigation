@@ -89,6 +89,10 @@ def _pair_stereo(
     cam1_data: Path,
     maximum_delta_ns: int,
 ) -> list[EurocStereoFrame]:
+    # Validate the complete acquisition manifests before pairing. Otherwise an
+    # unmatched CSV row could silently escape frame-presence/path checks.
+    cam0_paths = [_safe_frame_path(cam0_data, frame.filename) for frame in cam0]
+    cam1_paths = [_safe_frame_path(cam1_data, frame.filename) for frame in cam1]
     pairs: list[EurocStereoFrame] = []
     left = right = 0
     while left < len(cam0) and right < len(cam1):
@@ -96,8 +100,8 @@ def _pair_stereo(
         if abs(delta) <= maximum_delta_ns:
             pairs.append(EurocStereoFrame(
                 timestamp_ns=max(cam0[left].timestamp_ns, cam1[right].timestamp_ns),
-                cam0_path=_safe_frame_path(cam0_data, cam0[left].filename),
-                cam1_path=_safe_frame_path(cam1_data, cam1[right].filename),
+                cam0_path=cam0_paths[left],
+                cam1_path=cam1_paths[right],
                 timestamp_delta_ns=abs(delta),
             ))
             left += 1
