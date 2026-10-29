@@ -6,7 +6,7 @@ A modern C++/Python robotics portfolio project for GPS-denied UAV navigation: ca
 
 | Area | Retained result |
 |---|---:|
-| Python tests | 57 passed |
+| Python tests | 61 passed |
 | C++ tests | 9 passed |
 | GPS-denied PX4 mission | 5/5 waypoints |
 | Maximum settled waypoint error | 0.883 m |
@@ -64,6 +64,7 @@ For the pinned live PX4/Gazebo commands, see the [clean-machine demo guide](docs
 ## Evidence map
 
 - [Measured benchmark report](docs/benchmark.md)
+- [EuRoC sensor acquisition/replay gate and current blocker](docs/euroc-sensor-acceptance.md)
 - [Machine-readable benchmark summary](docs/generated/final-benchmark.json)
 - [GPS-denied mission result](simulation/px4/evidence/m6-t03-mission.json)
 - [Estimator-loss failsafe result](simulation/px4/evidence/m6-t04-failsafe.json)

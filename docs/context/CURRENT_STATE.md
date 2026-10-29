@@ -3,7 +3,7 @@
 ## Verified final state
 
 - Formal task graph: **39/39 complete**
-- Python tests: **57 passing**
+- Python tests: **61 passing**
 - C++ tests: **9/9 passing**
 - Full deterministic gate: **PASS**
 - Physical UAV validation: **none**
@@ -112,6 +112,13 @@ Remaining formal tasks: none.
 - no end-to-end EuRoC camera/IMU estimator run or ATE/RPE result
 - no physical camera/IMU rig or UAV flight validation
 - no ARM flight-computer profiling, production deployment or safety certification
+
+## Acceptance closeout — sensor acquisition boundary
+
+- A fail-closed full-sequence EuRoC stereo/IMU audit now verifies provenance fields, referenced frame presence, stereo coverage/timing, IMU gaps and camera timestamps bracketed by IMU.
+- A timestamp-ordered sensor replay contract emits only camera/IMU inputs and deliberately cannot load ground truth. Four deterministic regression tests prove ground-truth separation, ordering, failure thresholds and path safety.
+- Official metadata retained by Actions run `40888820740` identifies `machine_hall.zip` (12,683,729,426 bytes; MD5 `363f5c2502b469cdd97ef85997714806`). No full sensor archive is cached. The subsequent bounded request received HTTP 429, so it was not repeated unchanged.
+- Real EuRoC camera/IMU estimator trajectory and ATE/RPE remain **BLOCKED**, not passed. The new deterministic tests validate ingestion controls only; they are not dataset or estimator-accuracy substitutes.
 
 ## Reproduction command
 
