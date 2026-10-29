@@ -1,0 +1,60 @@
+name: EuRoC sensor acceptance data preparation
+on:
+  push:
+    branches: [acceptance/engineering-closeout-2026-10-29]
+    paths: [.github/workflows/euroc-acceptance-data.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Download official ETH EuRoC MH_01_easy sensor sequence
+        run: |
+          mkdir -p "$RUNNER_TEMP/euroc" acceptance-data
+          printf '%s\n' 'Public ETH ASL research dataset; original published HTTP URL. No credentials are sent. Download is not estimator acceptance.' > acceptance-data/DOWNLOAD_SCOPE.txt
+          curl --fail --location --retry 1 --connect-timeout 20 --max-time 900 \
+            'http://robotics.ethz.ch/~asl-datasets/ijrr_euroc_mav_dataset/machine_hall/MH_01_easy/MH_01_easy.zip' \
+            -o "$RUNNER_TEMP/euroc/MH_01_easy.zip"
+          sha256sum "$RUNNER_TEMP/euroc/MH_01_easy.zip" > acceptance-data/dataset-sha256.txt
+      - name: Validate dataset layout and retain bounded sensor review subset
+        run: |
+          python - <<'PY'
+          import csv, io, json, os, zipfile
+          from pathlib import Path
+          source = Path(os.environ['RUNNER_TEMP']) / 'euroc' / 'MH_01_easy.zip'
+          with zipfile.ZipFile(source) as archive:
+              names = archive.namelist()
+              first = next(n for n in names if n.endswith('mav0/cam0/data.csv'))
+              prefix = first[:-len('mav0/cam0/data.csv')]
+              required = ['mav0/cam0/data.csv','mav0/cam1/data.csv','mav0/imu0/data.csv','mav0/cam0/sensor.yaml','mav0/cam1/sensor.yaml','mav0/imu0/sensor.yaml','mav0/state_groundtruth_estimate0/data.csv']
+              for name in required:
+                  if prefix + name not in names:
+                      raise RuntimeError('Required sensor source absent: ' + name)
+              chosen = []
+              for camera in ('cam0','cam1'):
+                  rows = [r for r in csv.reader(io.StringIO(archive.read(prefix+f'mav0/{camera}/data.csv').decode())) if r and not r[0].startswith('#')]
+                  chosen += [prefix+f'mav0/{camera}/data/'+row[1].strip() for row in rows[:300]]
+              with zipfile.ZipFile('acceptance-data/MH01-sensor-review-first300.zip','w',compression=zipfile.ZIP_STORED) as subset:
+                  for name in [prefix+r for r in required] + chosen:
+                      subset.writestr(name[len(prefix):], archive.read(name))
+              report={'dataset':'EuRoC MH_01_easy','source':'ETH ASL official archive','license_reference':'https://doi.org/10.3929/ethz-b-000690084','use':'non-commercial engineering evaluation; original attribution retained','subset':'first 300 stereo pairs for implementation review only; not a full-sequence acceptance run','accuracy_verified':False,'file_count':len(names)}
+              Path('acceptance-data/PROVENANCE.json').write_text(json.dumps(report,indent=2)+'\n')
+          PY
+      - uses: actions/cache/save@v4
+        with:
+          path: ${{ runner.temp }}/euroc/MH_01_easy.zip
+          key: euroc-MH01-official-sensor-acceptance-v1
+      - name: Retain bounded sensor review data and provenance
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: euroc-sensor-review-data
+          path: acceptance-data/
+          retention-days: 3
+          if-no-files-found: error

@@ -1,0 +1,60 @@
+name: Official EuRoC archive range inspection
+on:
+  push:
+    branches: [acceptance/engineering-closeout-2026-10-29]
+    paths: [.github/workflows/euroc-range-probe.yml]
+permissions:
+  contents: read
+jobs:
+  archive:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Inspect official archived dataset ZIP central directory
+        run: |
+          mkdir -p range-evidence
+          python - <<'PY'
+          import io,json,re,zipfile
+          from pathlib import Path
+          from urllib.request import Request,urlopen
+          URL='https://www.research-collection.ethz.ch/server/api/core/bitstreams/7b2419c1-62b5-4714-b7f8-485e5fe3e5fe/content'
+          SIZE=12683729426
+          class Remote(io.RawIOBase):
+              def __init__(self): self.pos=0; self.bytes_read=0
+              def readable(self): return True
+              def seekable(self): return True
+              def tell(self): return self.pos
+              def seek(self,p,whence=0):
+                  self.pos=p if whence==0 else self.pos+p if whence==1 else SIZE+p
+                  if not 0<=self.pos<=SIZE: raise ValueError('outside archive')
+                  return self.pos
+              def read(self,n=-1):
+                  if n<0:n=SIZE-self.pos
+                  n=min(n,SIZE-self.pos)
+                  if n==0:return b''
+                  if n>4*1024*1024:raise ValueError('metadata read exceeds bound')
+                  end=self.pos+n-1
+                  req=Request(URL,headers={'Range':f'bytes={self.pos}-{end}','Accept-Encoding':'identity'})
+                  with urlopen(req,timeout=45) as r:
+                      if r.status!=206 or r.headers.get('Content-Range')!=f'bytes {self.pos}-{end}/{SIZE}':
+                          raise RuntimeError('server did not honour bounded range')
+                      data=r.read(n+1)
+                  if len(data)!=n:raise IOError('truncated range')
+                  self.pos+=n;self.bytes_read+=n;return data
+          source=Remote()
+          try:
+              with zipfile.ZipFile(source) as z:
+                  members=[{'name':i.filename,'compression':i.compress_type,'compressed_bytes':i.compress_size,'bytes':i.file_size,'offset':i.header_offset,'crc32':i.CRC} for i in z.infolist()]
+              report={'source':URL,'official_archive_bytes':SIZE,'metadata_bytes_transferred':source.bytes_read,'members':members,'accuracy_verified':False}
+              Path('range-evidence/official-members.json').write_text(json.dumps(report,indent=2)+'\n')
+              print(json.dumps(report,indent=2))
+          except Exception as e:
+              Path('range-evidence/error.txt').write_text(type(e).__name__+': '+str(e))
+              raise
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: official-euroc-archive-layout
+          path: range-evidence/
+          retention-days: 3

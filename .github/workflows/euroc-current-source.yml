@@ -1,0 +1,57 @@
+name: Resolve official EuRoC current repository metadata
+on:
+  push:
+    branches: [acceptance/engineering-closeout-2026-10-29]
+    paths: [.github/workflows/euroc-current-source.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  resolve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: Read public ETH dataset metadata without credentials
+        run: |
+          mkdir -p current-source
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from urllib.request import urlopen
+          base='https://www.research-collection.ethz.ch/server/api'
+          item='bcaf173e-5dac-484b-bc37-faf97a594f1f'
+          def read(url):
+              if not url.startswith('https://www.research-collection.ethz.ch/'):
+                  raise ValueError('unexpected external metadata host')
+              with urlopen(url,timeout=30) as response:
+                  return json.loads(response.read(2000000))
+          report={'official_dataset':'https://doi.org/10.3929/ethz-b-000690084','downloaded':False,'accuracy_verified':False,'files':[]}
+          try:
+              bundles=read(base+'/core/items/'+item+'/bundles')
+              Path('current-source/bundles.json').write_text(json.dumps(bundles,indent=2))
+              for bundle in bundles.get('_embedded',{}).get('bundles',[]):
+                  if bundle.get('name') != 'ORIGINAL':
+                      continue
+                  href=bundle['_links']['bitstreams']['href']
+                  streams=read(href)
+                  Path('current-source/bitstreams.json').write_text(json.dumps(streams,indent=2))
+                  for entry in streams.get('_embedded',{}).get('bitstreams',[]):
+                      record={key:entry.get(key) for key in ('uuid','name','sizeBytes','checkSum')}
+                      record['content']=entry.get('_links',{}).get('content',{}).get('href')
+                      report['files'].append(record)
+              if not report['files']:
+                  raise RuntimeError('public metadata has no original dataset files')
+          except Exception as error:
+              report['failure']=type(error).__name__+': '+str(error)
+              raise
+          finally:
+              Path('current-source/manifest.json').write_text(json.dumps(report,indent=2)+'\n')
+              print(json.dumps(report,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: euroc-official-current-source-metadata
+          path: current-source/
+          retention-days: 3
+          if-no-files-found: error
