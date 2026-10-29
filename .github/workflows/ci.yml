@@ -16,9 +16,14 @@ jobs:
       - run: python -m compileall src tests
 
   cpp:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+      - name: Install required Eigen3 development dependency
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes --no-install-recommends libeigen3-dev
+          dpkg-query --show libeigen3-dev
       - run: cmake -S cpp -B build/cpp
       - run: cmake --build build/cpp --parallel
       - run: ctest --test-dir build/cpp --output-on-failure
